@@ -2,3 +2,5 @@
 __pycache__
 .coverage
 htmlcov
+
+expiration_date_tracking_app/data/database.sqlite
