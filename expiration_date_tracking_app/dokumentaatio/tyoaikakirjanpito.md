@@ -9,4 +9,5 @@
 | 27.3. | 2 | kauppiaan rekisteröintinäkymä käyttöliittymään, debuggailua |
 | 28.3. | 1.5 | service-luokka käyttäjien hallinnointiin, debuggailua |
 | 28.3. | 1 | testauksen aloittaminen, konfiguraation debuggailua |
-| yht. | 10 | 
+| 28.3. | 0.5 | yksi testi lisää, invoke käyttöön, changelog luotu | 
+| yht. | 10.5 | 
