@@ -8,4 +8,5 @@
 | 26.3. | 2 | sqlite3 omaan projektiin, luotu alustavakauppiasluokka ja sen talletus tietokantaan |
 | 27.3. | 2 | kauppiaan rekisteröintinäkymä käyttöliittymään, debuggailua |
 | 28.3. | 1.5 | service-luokka käyttäjien hallinnointiin, debuggailua |
-| yht. | 9 | |
+| 28.3. | 1 | testauksen aloittaminen, konfiguraation debuggailua |
+| yht. | 10 | 
