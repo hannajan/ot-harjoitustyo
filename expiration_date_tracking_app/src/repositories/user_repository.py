@@ -21,6 +21,12 @@ class UserRepository:
 
     return user
   
+  def delete_all(self):
+    cursor = self._connection.cursor()
+
+    cursor.execute("DELETE FROM users")
+    self._connection.commit()
+  
   def get_all(self):
     cursor = self._connection.cursor()
     cursor.execute("SELECT * FROM users")
