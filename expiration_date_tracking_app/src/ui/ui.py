@@ -15,16 +15,13 @@ class UI:
 
         self._current_view = None
 
-  def _handle_register_merchant(self,username, password):
-    print(f"Username to register: {username}, password: {password}")
-
   def _show_create_merchant_view(self):
     self._current_view = CreateMerchantView(
-        self._root,
-        self._handle_register_merchant
+        self._root
     )
 
     self._current_view.pack()
+    
 
 window = Tk()
 window.title("Register")

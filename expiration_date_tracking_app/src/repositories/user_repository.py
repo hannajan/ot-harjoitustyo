@@ -29,4 +29,15 @@ class UserRepository:
 
     return list(map(get_user_by_row, rows))
   
+  def find_by_username(self, username):
+    cursor = self._connection.cursor()
+    cursor.execute(
+      "SELECT * FROM users WHERE username = ?",
+        (username,)
+    )
+
+    row = cursor.fetchone()
+
+    return get_user_by_row(row)
+  
 user_repository = UserRepository(get_database_connection())

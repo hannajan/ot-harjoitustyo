@@ -1,9 +1,9 @@
 from tkinter import ttk, constants
+from services.user_service import user_service
 
 class CreateMerchantView:
-  def __init__(self, root, handle_register_merchant):
+  def __init__(self, root):
     self._root = root
-    self._handle_register_merchant = handle_register_merchant
     self._frame = None
     self._entry_username = None
     self._entry_password = None
@@ -20,7 +20,12 @@ class CreateMerchantView:
     username = self._entry_username.get()
     password = self._entry_password.get()
 
-    self._handle_register_merchant(username, password)
+    try:
+      user_service.register_merchant(username, password)
+    except ValueError as error:
+      print(f"Error: {error}")
+
+   
 
   def _initialize(self):
     self._frame = ttk.Frame(master=self._root)
