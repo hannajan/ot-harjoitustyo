@@ -1,7 +1,8 @@
-# Ohjelmistotekniikka, harjoitustyö
+# Päiväyshallintasovellus
 
-Harjoitustyön aihe: **päiväyshallintasovellus**, jolla voi seurata kaupassa myynnissä olevien tuotteiden *parasta ennen -päiväyksiä* ja hallinnoida niitä. 
+**Päiväyshallintasovellus**, jolla voi seurata kaupassa myynnissä olevien tuotteiden *parasta ennen -päiväyksiä* ja hallinnoida niitä. 
 
-[Laskarit](https://github.com/hannajan/ot-harjoitustyo/tree/master/laskarit)  
+## Dokumentaatio
 [Vaatimusmäärittely](https://github.com/hannajan/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)  
-[Työaikakirjanpito](https://github.com/hannajan/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
+[Työaikakirjanpito](https://github.com/hannajan/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)  
+[Changelog](https://github.com/hannajan/ot-harjoitustyo/blob/master/expiration_date_tracking_app/dokumentaatio/changelog.md)  
