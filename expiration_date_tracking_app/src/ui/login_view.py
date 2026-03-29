@@ -1,5 +1,6 @@
 from tkinter import ttk, StringVar, constants
 from services.user_service import user_service
+import threading
 
 class LoginView():
   def __init__(self, root, handle_login, handle_create_merchant_view):
@@ -22,9 +23,14 @@ class LoginView():
     username = self._entry_username.get()
     password = self._entry_password.get()
 
+    self._status_label.config(text="Logging in...")
+    self._frame.update_idletasks()
+    threading.Thread(target=self._do_login, args=(username, password), daemon=True).start()
+
+  def _do_login(self, username, password):
     try:
       user_service.login(username, password)
-      self._handle_login()
+      self._root.after(0, lambda: self._handle_login())
     except ValueError as e:
       print(e)
 
@@ -37,6 +43,8 @@ class LoginView():
 
     label_password = ttk.Label(master=self._frame, text="Password")
     self._entry_password = ttk.Entry(master=self._frame, show="*")
+    self._status_label = ttk.Label(self._frame, text="")
+    self._status_label.grid(row=4, column=0, columnspan=2, pady=5)
     
     login_button = ttk.Button(
         master=self._frame,

@@ -6,10 +6,13 @@ class User:
   def __init__(self, username, role, password=None, user_id=None, password_hash=None):
     self.user_id = user_id or str(uuid.uuid4())
     self.username = username
-    if password:
-      self.password_hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+
+    if password_hash:
+      self.password_hash = password_hash  # ✔ DB:stä loginissa
+    elif password:
+      self.password_hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())  # Rekisteröinti
     else:
-      self.password_hash = password_hash
+      raise ValueError("Password or password_hash must be provided")
 
     if role == UserRole.EMPLOYEE or role == UserRole.MERCHANT:
       self.role = role

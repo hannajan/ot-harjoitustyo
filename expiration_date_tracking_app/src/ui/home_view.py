@@ -5,7 +5,7 @@ class HomeView():
   def __init__(self, root):
     self._root = root
     self._frame = None
-    self._user = user_service.get_current_user()
+    self._user = None
 
     self._initialize()
 
@@ -16,10 +16,14 @@ class HomeView():
     self._frame.destroy()
 
   def _initialize(self):
-    self._frame = ttk.Frame(master=self._root)
+    self._frame = ttk.Frame(master=self._root, padding=20)
 
-    title = ttk.Label(master=self._frame, text="Welcome", font=(None, 32, "bold"))
-    text = ttk.Label(master=self._frame, text=f"Logged in as {self._user.username}")
+    self._title = ttk.Label(master=self._frame, text="Welcome", font=(None, 32, "bold"))
+    self._status_label = ttk.Label(master=self._frame, text="Loading user...")
 
-    title.grid(row=0, column=0, columnspan=2, pady=5)
-    text.grid(row=1, column=0)
+    self._title.grid(row=0, column=0, sticky="NW", pady=(0, 10))
+    self._status_label.grid(row=1, column=0, sticky="NW", pady=(0, 10))
+
+  def set_user(self, user):
+    self._user = user
+    self._status_label.config(text=f"Logged in as {user.username}")

@@ -2,6 +2,7 @@ from tkinter import Tk
 from ui.create_merchant_view import CreateMerchantView
 from ui.login_view import LoginView
 from ui.home_view import HomeView
+from services.user_service import user_service
 
 class UI:
   def __init__(self, root):
@@ -34,8 +35,12 @@ class UI:
     self._current_view = HomeView(
       self._root
     )
-
     self._current_view.pack() 
+
+    self._current_view._frame.update_idletasks()
+
+    user = user_service.get_current_user()
+    self._current_view.set_user(user)
 
   def _show_create_merchant_view(self):
     self._hide_current_view()
