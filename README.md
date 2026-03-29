@@ -16,6 +16,11 @@ Asennus tehdään komennolla:
 poetry install
 ```
 
+Alustus tehdään komennolla:
+```bash
+poetry run invoke build
+```
+
 ## Komentorivitoiminnot
 
 ### Ohjelman suorittaminen
