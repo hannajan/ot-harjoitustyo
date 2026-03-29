@@ -15,4 +15,7 @@ class User:
       self.role = role
     else:
       raise ValueError("Invalid role")
+    
+  def check_password(self, password):
+    return bcrypt.checkpw(password.encode('utf-8'), self.password_hash)
 

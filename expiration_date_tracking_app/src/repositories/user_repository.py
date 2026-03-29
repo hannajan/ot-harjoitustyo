@@ -46,4 +46,11 @@ class UserRepository:
 
     return get_user_by_row(row)
   
+  def get_user_by_id(self, user_id):
+    cursor = self._connection.cursor()
+    cursor.execute(
+      "SELECT * FROM users WHERE user_id = ?",
+        (user_id,)
+    )
+  
 user_repository = UserRepository(get_database_connection())

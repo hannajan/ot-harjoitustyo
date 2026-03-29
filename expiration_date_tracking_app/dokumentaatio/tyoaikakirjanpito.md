@@ -10,4 +10,5 @@
 | 28.3. | 1.5 | service-luokka käyttäjien hallinnointiin, debuggailua |
 | 28.3. | 1 | testauksen aloittaminen, konfiguraation debuggailua |
 | 28.3. | 0.5 | yksi testi lisää, invoke käyttöön, changelog luotu | 
-| yht. | 10.5 | 
+| 28.3. | 2 | login-näkymä ja koti-näkymä |
+| yht. | 12.5 | 

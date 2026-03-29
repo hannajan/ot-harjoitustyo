@@ -1,13 +1,14 @@
-from tkinter import ttk, constants
+from tkinter import ttk, StringVar, constants
 from services.user_service import user_service
 
-class CreateMerchantView:
-  def __init__(self, root, handle_show_login_view):
+class LoginView():
+  def __init__(self, root, handle_login, handle_create_merchant_view):
     self._root = root
     self._frame = None
     self._entry_username = None
     self._entry_password = None
-    self._handle_show_login_view = handle_show_login_view
+    self._handle_login = handle_login
+    self._handle_show_create_merchant_view = handle_create_merchant_view
 
     self._initialize()
 
@@ -17,20 +18,19 @@ class CreateMerchantView:
   def destroy(self):
     self._frame.destroy()
 
-  def _registeration_handler(self):
+  def _login_handler(self):
     username = self._entry_username.get()
     password = self._entry_password.get()
 
     try:
-      user_service.register_merchant(username, password)
-      self.destroy()
-      self._handle_show_login_view()
-    except ValueError as error:
-      print(f"Error: {error}")
+      user_service.login(username, password)
+      self._handle_login()
+    except ValueError as e:
+      print(e)
 
   def _initialize(self):
     self._frame = ttk.Frame(master=self._root)
-    title = ttk.Label(master=self._frame, text="Register as merchant")
+    title = ttk.Label(master=self._frame, text="Login")
 
     label_username = ttk.Label(master=self._frame, text="Username")
     self._entry_username = ttk.Entry(master=self._frame)
@@ -38,10 +38,17 @@ class CreateMerchantView:
     label_password = ttk.Label(master=self._frame, text="Password")
     self._entry_password = ttk.Entry(master=self._frame, show="*")
     
-    button = ttk.Button(
+    login_button = ttk.Button(
         master=self._frame,
-        text="Register",
-        command=self._registeration_handler
+        text="Login",
+        command=self._login_handler
+    )
+
+    register_button = ttk.Button(
+      master=self._frame,
+      text ="Register as Merchant",
+      command=self._handle_show_create_merchant_view
+
     )
 
     title.grid(row=0, column=0, columnspan=2, pady=5)
@@ -49,4 +56,5 @@ class CreateMerchantView:
     self._entry_username.grid(row=1, column=1, padx=5, pady=5)
     label_password.grid(row=2, column=0, padx=5, pady=5)
     self._entry_password.grid(row=2, column=1, padx=5, pady=5)
-    button.grid(row=3, column=0, columnspan=2, pady=10)
+    login_button.grid(row=3, column=0, columnspan=2, pady=10)
+    register_button.grid(padx=5, pady=5, sticky=constants.EW)
