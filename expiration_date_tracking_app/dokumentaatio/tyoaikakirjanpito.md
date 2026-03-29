@@ -7,9 +7,6 @@
 | 25.3. | 1 | sqlite3 ja bcrypt dokumentaatioon perehtyminen, bcrypt asennus ja user luokka | 
 | 26.3. | 2 | sqlite3 omaan projektiin, luotu alustavakauppiasluokka ja sen talletus tietokantaan |
 | 27.3. | 2 | kauppiaan rekisteröintinäkymä käyttöliittymään, debuggailua |
-| 28.3. | 1.5 | service-luokka käyttäjien hallinnointiin, debuggailua |
-| 28.3. | 1 | testauksen aloittaminen, konfiguraation debuggailua |
-| 28.3. | 0.5 | yksi testi lisää, invoke käyttöön, changelog luotu | 
-| 28.3. | 2 | login-näkymä ja koti-näkymä |
-| 29.3. | 3.5 | ui käsittelee siirtymät näkymien välillä, debuggailu, ui ei jäädy odottamaan loginia, dokumentaation päivitys, näytetään virheilmoitus kun käyttäjää ei löydy |
-| yht. | 16 | 
+| 28.3. | 5 | service-luokka käyttäjien hallinnointiin, debuggailua , testauksen aloittaminen, konfiguraation debuggailua, yksi testi lisää, invoke käyttöön, changelog luotu, login-näkymä ja koti-näkymä|
+| 29.3. | 4 | ui käsittelee siirtymät näkymien välillä, debuggailu, ui ei jäädy odottamaan loginia, dokumentaation päivitys, näytetään virheilmoitus kun käyttäjää ei löydy, build luo tietokantatiedoston |
+| yht. | 16.5 | 
