@@ -27,6 +27,7 @@ class LoginView():
     self._frame.update_idletasks()
     threading.Thread(target=self._do_login, args=(username, password), daemon=True).start()
 
+  # generoitu koodi alkaa
   def _do_login(self, username, password):
     try:
       user_service.login(username, password)
@@ -34,6 +35,7 @@ class LoginView():
     except ValueError as e:
       error_message = str(e)
       self._root.after(0, lambda msg=error_message: self._status_label.config(text=f"Error: {msg}"))
+  # generoitu koodi päättyy
 
   def _initialize(self):
     self._frame = ttk.Frame(master=self._root)
