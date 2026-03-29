@@ -16,14 +16,7 @@
 poetry install
 ```
 
-2. _data_-hakemiston sisään, tulee luoda tyhjä _database.sqlite_-kansio
-
-```bash
-mkdir data
-touch data/dabase.sqlite
-```
-
-3. Alustus tehdään komennolla:
+2. Alustus tehdään komennolla:
 
 ```bash
 poetry run invoke build
