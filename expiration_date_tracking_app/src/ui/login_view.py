@@ -32,7 +32,8 @@ class LoginView():
       user_service.login(username, password)
       self._root.after(0, lambda: self._handle_login())
     except ValueError as e:
-      print(e)
+      error_message = str(e)
+      self._root.after(0, lambda msg=error_message: self._status_label.config(text=f"Error: {msg}"))
 
   def _initialize(self):
     self._frame = ttk.Frame(master=self._root)
