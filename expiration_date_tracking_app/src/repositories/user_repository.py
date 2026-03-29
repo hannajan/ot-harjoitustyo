@@ -52,5 +52,9 @@ class UserRepository:
       "SELECT * FROM users WHERE user_id = ?",
         (user_id,)
     )
+
+    row = cursor.fetchone()
+
+    return get_user_by_row(row)
   
 user_repository = UserRepository(get_database_connection())

@@ -23,8 +23,6 @@ class TestUserRepository(unittest.TestCase):
     self.assertEqual(users[0].username, "merchant")
 
   def test_find_merchant_by_username_returns_correct_user(self):
-    
-
     user_repository.create(self.merchant)
     user_repository.create(self.merchant2)
     user_repository.create(self.merchant3)
@@ -32,5 +30,14 @@ class TestUserRepository(unittest.TestCase):
     user = user_repository.find_by_username("storeowner")
 
     self.assertEqual(user.username, "storeowner")
+
+  def test_get_user_by_id_returns_correct_user(self):
+    user_repository.create(self.merchant)
+    user_repository.create(self.merchant2)
+    user_repository.create(self.merchant3)
+
+    user = user_repository.get_user_by_id(self.merchant3.user_id)
+
+    self.assertEqual(user.username, "merchant_test")
 
 
