@@ -5,5 +5,4 @@ htmlcov
 
 expiration_date_tracking_app/data/database.sqlite
 expiration_date_tracking_app/data/test-database.sqlite
-expiration_date_tracking_app/.env
 expiration_date_tracking_app/.env.test

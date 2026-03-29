@@ -10,13 +10,21 @@
 
 ## Asennus
 
-Asennus tehdään komennolla:
+1. Asennus tehdään komennolla:
 
 ```bash
 poetry install
 ```
 
-Alustus tehdään komennolla:
+2. _data_-hakemiston sisään, tulee luoda tyhjä _database.sqlite_-kansio
+
+```bash
+mkdir data
+touch data/dabase.sqlite
+```
+
+3. Alustus tehdään komennolla:
+
 ```bash
 poetry run invoke build
 ```
