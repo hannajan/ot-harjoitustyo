@@ -4,5 +4,6 @@ from config import DATABASE_FILE_PATH
 connection = sqlite3.connect(DATABASE_FILE_PATH, check_same_thread=False)
 connection.row_factory = sqlite3.Row
 
+
 def get_database_connection():
-  return connection
+    return connection

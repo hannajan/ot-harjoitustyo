@@ -4,55 +4,56 @@ from repositories.user_repository import (
     user_repository as default_user_repository
 )
 
+
 class UserService:
-  def __init__(self, user_repository = default_user_repository):
-    self._user_repository = user_repository
-    self._user = None
+    def __init__(self, user_repository=default_user_repository):
+        self._user_repository = user_repository
+        self._user = None
 
-  def register_merchant(self, username, password):
-    if not username or not password:
-      raise ValueError("Username or password missing")
-    
-    #username is at least 5 charaters long
-    if len(username) < 5:
-      raise ValueError("Username must be at least 5 characters long")
+    def register_merchant(self, username, password):
+        if not username or not password:
+            raise ValueError("Username or password missing")
 
-    #username is unique
-    if self._user_repository.find_by_username(username):
-      raise ValueError("Username already exists")
+        # username is at least 5 charaters long
+        if len(username) < 5:
+            raise ValueError("Username must be at least 5 characters long")
 
-    #password is at least 8 characters long
-    if len(password) < 8:
-      raise ValueError("Password must be at least 8 characters long")
-    
-    merchant = Merchant(username, password)
-    self._user_repository.create(merchant)
+        # username is unique
+        if self._user_repository.find_by_username(username):
+            raise ValueError("Username already exists")
 
-  def login(self, username, password):
-    if not username or not password:
-      raise ValueError("Username or password missing")
+        # password is at least 8 characters long
+        if len(password) < 8:
+            raise ValueError("Password must be at least 8 characters long")
 
-    user = self._user_repository.find_by_username(username)
+        merchant = Merchant(username, password)
+        self._user_repository.create(merchant)
 
-    if not user:
-      raise ValueError("User not found")
-    
-    if user.check_password(password): 
-      self._user = user
-      return user
-    else:
-      raise ValueError("Wrong username or password")
-    
-  def get_current_user(self):
-    return self._user
-    
-  def get_user_by_id(self, user_id):
-    if not user_id:
-      raise ValueError("User id missing")
-    
-    user = self._user_repository.get_user_by_id(user_id)
+    def login(self, username, password):
+        if not username or not password:
+            raise ValueError("Username or password missing")
 
-    return user
+        user = self._user_repository.find_by_username(username)
 
-    
+        if not user:
+            raise ValueError("User not found")
+
+        if user.check_password(password):
+            self._user = user
+            return user
+
+        raise ValueError("Wrong username or password")
+
+    def get_current_user(self):
+        return self._user
+
+    def get_user_by_id(self, user_id):
+        if not user_id:
+            raise ValueError("User id missing")
+
+        user = self._user_repository.get_user_by_id(user_id)
+
+        return user
+
+
 user_service = UserService()

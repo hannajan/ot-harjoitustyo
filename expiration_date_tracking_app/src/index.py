@@ -4,14 +4,16 @@ from ui.ui import UI
 
 dirname = os.path.dirname(__file__)
 
+
 def main():
-  window = Tk()
-  window.title("Expiration date tracking app")
+    window = Tk()
+    window.title("Expiration date tracking app")
 
-  ui_view = UI(window)
-  ui_view.start()
+    ui_view = UI(window)
+    ui_view.start()
 
-  window.mainloop()
+    window.mainloop()
+
 
 if __name__ == "__main__":
     main()
