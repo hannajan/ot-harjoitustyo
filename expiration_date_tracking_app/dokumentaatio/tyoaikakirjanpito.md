@@ -6,7 +6,8 @@
 | 24.3. | 1.5 | Projektin rungon luominen, TkInteriin tutustuminen ja alustus omaan projektiin|
 | 25.3. | 1 | sqlite3 ja bcrypt dokumentaatioon perehtyminen, bcrypt asennus ja user luokka | 
 | 26.3. | 2 | sqlite3 omaan projektiin, luotu alustavakauppiasluokka ja sen talletus tietokantaan |
-| 27.3. | 2 | kauppiaan rekisteröintinäkymä käyttöliittymään, debuggailua |
-| 28.3. | 5 | service-luokka käyttäjien hallinnointiin, debuggailua , testauksen aloittaminen, konfiguraation debuggailua, yksi testi lisää, invoke käyttöön, changelog luotu, login-näkymä ja koti-näkymä|
-| 29.3. | 4 | ui käsittelee siirtymät näkymien välillä, debuggailu, ui ei jäädy odottamaan loginia, dokumentaation päivitys, näytetään virheilmoitus kun käyttäjää ei löydy, build luo tietokantatiedoston |
-| yht. | 16.5 | 
+| 27.3. | 2 | Kauppiaan rekisteröintinäkymä käyttöliittymään, debuggailua |
+| 28.3. | 5 | Service-luokka käyttäjien hallinnointiin, debuggailua , testauksen aloittaminen, konfiguraation debuggailua, yksi testi lisää, invoke käyttöön, changelog luotu, login-näkymä ja koti-näkymä|
+| 29.3. | 4 | UI käsittelee siirtymät näkymien välillä, debuggailu, ui ei jäädy odottamaan loginia, dokumentaation päivitys, näytetään virheilmoitus kun käyttäjää ei löydy, build luo tietokantatiedoston |
+| 3.4. | 0.5 | Otettu pylint ja autopep8 käyttöön |
+| yht. | 17 | 
