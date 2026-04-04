@@ -23,6 +23,10 @@ def create_tables(connection):
         );
     ''')
 
+    cursor.execute('''
+        CREATE UNIQUE INDEX idx_user_username ON users(username);
+    ''')
+
     connection.commit()
 
 
