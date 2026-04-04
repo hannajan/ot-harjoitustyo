@@ -10,7 +10,7 @@ class UserService:
         self._user_repository = user_repository
         self._user = None
 
-    def register_merchant(self, username, password):
+    def register_merchant(self, username=None, password=None):
         if not username or not password:
             raise ValueError("Username or password missing")
 
@@ -27,9 +27,11 @@ class UserService:
             raise ValueError("Password must be at least 8 characters long")
 
         merchant = Merchant(username, password)
-        self._user_repository.create(merchant)
+        created_user = self._user_repository.create(merchant)
 
-    def login(self, username, password):
+        return created_user
+
+    def login(self, username=None, password=None):
         if not username or not password:
             raise ValueError("Username or password missing")
 
@@ -47,7 +49,7 @@ class UserService:
     def get_current_user(self):
         return self._user
 
-    def get_user_by_id(self, user_id):
+    def get_user_by_id(self, user_id=None):
         if not user_id:
             raise ValueError("User id missing")
 

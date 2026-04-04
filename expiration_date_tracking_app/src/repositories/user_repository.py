@@ -34,6 +34,8 @@ class UserRepository:
     def delete_all(self):
         cursor = self._connection.cursor()
 
+        cursor.execute("PRAGMA foreign_keys = ON;")
+
         cursor.execute("DELETE FROM users")
         self._connection.commit()
 

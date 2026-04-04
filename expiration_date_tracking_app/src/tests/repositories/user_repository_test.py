@@ -1,10 +1,12 @@
 import unittest
 from repositories.user_repository import user_repository
+from repositories.store_repository import store_repository
 from entities.merchant import Merchant
 
 
 class TestUserRepository(unittest.TestCase):
     def setUp(self):
+        store_repository.delete_all()
         user_repository.delete_all()
         self.merchant = Merchant("merchant", "password")
         self.merchant2 = Merchant("storeowner", "secret123")

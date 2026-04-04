@@ -4,12 +4,16 @@ from database_connection import get_database_connection
 def drop_tables(connection):
     cursor = connection.cursor()
 
-    cursor.execute('''
-      DROP TABLE IF EXISTS users;
-    ''')
+    cursor.execute("PRAGMA foreign_keys = ON;")
 
     cursor.execute('''
       DROP TABLE IF EXISTS stores;
+    ''')
+
+    connection.commit()
+
+    cursor.execute('''
+      DROP TABLE IF EXISTS users;
     ''')
 
     connection.commit()

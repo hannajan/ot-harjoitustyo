@@ -42,5 +42,23 @@ class StoreRepository:
 
         return [get_store_by_row(row) for row in rows]
 
+    def delete_all(self):
+        cursor = self._connection.cursor()
+
+        cursor.execute("PRAGMA foreign_keys = ON;")
+
+        cursor.execute("DELETE FROM stores")
+        self._connection.commit()
+
+    def get_all(self):
+        cursor = self._connection.cursor()
+
+        cursor.execute(
+            "SELECT * FROM stores"
+        )
+
+        rows = cursor.fetchall()
+
+        return [get_store_by_row(row) for row in rows]
 
 store_repository = StoreRepository(get_database_connection())
