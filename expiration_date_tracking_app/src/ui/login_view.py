@@ -62,7 +62,6 @@ class LoginView():
             master=self._frame,
             text="Register as Merchant",
             command=self._handle_show_create_merchant_view
-
         )
 
         title.grid(row=0, column=0, columnspan=2, pady=5)

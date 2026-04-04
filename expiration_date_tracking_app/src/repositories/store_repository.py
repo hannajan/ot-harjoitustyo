@@ -30,5 +30,17 @@ class StoreRepository:
 
         return store
 
+    def find_all_by_owner_id(self, owner_id):
+        cursor = self._connection.cursor()
+
+        cursor.execute(
+            "SELECT * FROM stores WHERE owner_id = ?",
+            (owner_id,)
+        )
+
+        rows = cursor.fetchall()
+
+        return [get_store_by_row(row) for row in rows]
+
 
 store_repository = StoreRepository(get_database_connection())

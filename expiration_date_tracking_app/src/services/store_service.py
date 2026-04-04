@@ -25,4 +25,7 @@ class StoreService:
         store = Store(name, owner_id=user.user_id)
         return self._store_repository.create(store)
 
+    def get_stores_by_owner(self, owner_id):
+        return self._store_repository.find_all_by_owner_id(owner_id)
+
 store_service = StoreService()
