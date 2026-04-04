@@ -10,4 +10,5 @@
 | 28.3. | 5 | Service-luokka käyttäjien hallinnointiin, debuggailua , testauksen aloittaminen, konfiguraation debuggailua, yksi testi lisää, invoke käyttöön, changelog luotu, login-näkymä ja koti-näkymä|
 | 29.3. | 4 | UI käsittelee siirtymät näkymien välillä, debuggailu, ui ei jäädy odottamaan loginia, dokumentaation päivitys, näytetään virheilmoitus kun käyttäjää ei löydy, build luo tietokantatiedoston |
 | 3.4. | 0.5 | Otettu pylint ja autopep8 käyttöön |
-| yht. | 17 | 
+| 4.4. | 1.5 | Tietokantaan stores-taulu ja kaupan luokka, repositoria ja service |
+| yht. | 18.5 | 
