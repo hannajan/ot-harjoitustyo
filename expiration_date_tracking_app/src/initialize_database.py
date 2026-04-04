@@ -8,11 +8,17 @@ def drop_tables(connection):
       DROP TABLE IF EXISTS users;
     ''')
 
+    cursor.execute('''
+      DROP TABLE IF EXISTS stores;
+    ''')
+
     connection.commit()
 
 
 def create_tables(connection):
     cursor = connection.cursor()
+
+    cursor.execute("PRAGMA foreign_keys = ON;")
 
     cursor.execute('''
         CREATE TABLE users (

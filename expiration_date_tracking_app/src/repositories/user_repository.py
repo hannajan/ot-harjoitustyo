@@ -10,7 +10,7 @@ def get_user_by_row(row):
             username=row["username"],
             password_hash=row["password_hash"],
             role=row["role"]
-            )
+        )
 
     return None
 
