@@ -52,14 +52,28 @@ class HomeView():
             print("No stores")
         else:
             for i, store in enumerate(stores):
-                store_button = ttk.Button(
+                store_title = ttk.Label(
                     master=self._stores_frame,
                     text=store.name,
-                    command=lambda: print(f"{store.name} button pressed")
+                    font=(None, 12, "bold"),
+                    cursor="arrow"
                 )
 
-                store_button.grid(row=i, column=0, sticky="NW", pady=2)
-                self._stores.append(store_button)
+                store_title.grid(row=i, column=0, sticky="NW", pady=2)
+
+                store_title.bind(
+                    "<Button-1>",
+                    lambda event, store=store: print(f"{store.name} clicked")
+                )
+                store_title.bind("<Enter>", self._on_store_hover)
+                store_title.bind("<Leave>", self._on_store_leave)
+                self._stores.append(store_title)
+
+    def _on_store_hover(self, event):
+        event.widget.config(font=(None, 12, "bold", "underline"))
+
+    def _on_store_leave(self, event):
+        event.widget.config(font=(None, 12, "bold"))
 
     def _handle_save_store(self):
         store_name = self._store_name_var.get().strip()
