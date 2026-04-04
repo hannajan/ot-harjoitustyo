@@ -6,3 +6,5 @@ omit =
   src/build.py
   src/database_connection.py
   src/initialize_database.py
+  src/ui/**
+  src/index.py
