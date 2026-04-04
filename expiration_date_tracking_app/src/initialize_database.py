@@ -24,7 +24,12 @@ def create_tables(connection):
     ''')
 
     cursor.execute('''
-        CREATE UNIQUE INDEX idx_user_username ON users(username);
+        CREATE TABLE stores (
+        store_id TEXT PRIMARY KEY,
+        name TEXT NOT NULL,
+        owner_id TEXT NOT NULL,
+        FOREIGN KEY (owner_id) REFERENCES users(user_id)
+        );
     ''')
 
     connection.commit()
