@@ -1,7 +1,8 @@
 [run]
 source = src
 omit = 
-  src/**/__init__.py,src/tests/**
+  src/**/__init__.py
+  src/tests/**
   src/config.py
   src/build.py
   src/database_connection.py
