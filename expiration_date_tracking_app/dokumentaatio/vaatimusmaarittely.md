@@ -25,11 +25,11 @@ Myöhemmin sovellukseen saatetaan vielä lisätä _pääkäyttäjä_, jolla on k
 #### Kauppias
 - [x] voi luoda kaupan
 - [x] voi lisätä työntekijän
-  [x] - sovellus luo alustavan salasanan työntekijälle, jonka tulee vaihtaa salasana ensimmäisen kirjautumisen yhteydessä.
+  - [x] sovellus luo alustavan salasanan työntekijälle, jonka tulee vaihtaa salasana ensimmäisen kirjautumisen yhteydessä.
 - [ ] voi lisätä työntekijälle käyttöoikeudet kauppaan ja poistaa käyttöoikeudet.
 
 #### Kauppias tai työntekijä
-- [ ]voi lisätä _osaston_ kauppaan 
+- [ ] voi lisätä _osaston_ kauppaan 
   - [ ] voi lisätä _hyllyn_ osastoon
   - [ ] voi lisätä _hyllyrivin_ hyllyyn (ei pakollinen, oletuksena yksi hyllyrivi)
   - [ ] voi lisätä _tarkistussäännön_ osastoon, jonka perusteella tuotteita voi tarkastella (esim. 3 päivää ennen)
