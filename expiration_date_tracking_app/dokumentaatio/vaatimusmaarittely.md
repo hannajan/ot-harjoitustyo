@@ -18,8 +18,8 @@ Myöhemmin sovellukseen saatetaan vielä lisätä _pääkäyttäjä_, jolla on k
   - [x] Etusivulla on _rekisteröidy_ linkki, jota klikkaamalla aukeaa rekisteröitymislomake.
   -  [x] Käyttäjätunnuksen on oltava uniikki ja vähintään 5 merkkiä pitkä.
 - [x] _Kauppias_ tai _työntekijä_ voi kirjautua sisään sovellukseen.
-  [x] - Etusivulla on kirjautumislomake, johon syötetään käyttäjätunnus ja salasana.
-  [x] - Jos kirjautuminen ei onnistu annetaan virheilmoitus, jossa kerrotaan syy.
+  - [x] Etusivulla on kirjautumislomake, johon syötetään käyttäjätunnus ja salasana.
+  - [x] Jos kirjautuminen ei onnistu annetaan virheilmoitus, jossa kerrotaan syy.
 
 ### Kirjautumisen jälkeen 
 #### Kauppias
