@@ -9,7 +9,7 @@ class Employee(User):
             password=password,
             role=UserRole.EMPLOYEE,
             user_id=user_id
-            )
+        )
         self.employer_id = employer_id
         self.password_is_temporary = True
 

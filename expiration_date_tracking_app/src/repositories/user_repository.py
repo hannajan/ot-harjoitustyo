@@ -1,6 +1,5 @@
 from database_connection import get_database_connection
 
-from entities.user import User
 from entities.merchant import Merchant
 from entities.employee import Employee
 from entities.user_role import UserRole

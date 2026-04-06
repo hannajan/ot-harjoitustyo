@@ -2,18 +2,20 @@ import uuid
 import bcrypt
 from .user_role import UserRole
 
+
 def _hash_password(password):
     if password:
         if isinstance(password, str):
             if not password.startswith("$2b$"):
                 return bcrypt.hashpw(password.encode("utf-8"),
-                    bcrypt.gensalt()).decode("utf-8")
+                                     bcrypt.gensalt()).decode("utf-8")
         if isinstance(password, bytes):
             if not password.startswith(b"$2b$"):
                 return bcrypt.hashpw(password, bcrypt.gensalt())
         return password
 
     raise ValueError("Password must be provided")
+
 
 class User:
     def __init__(self, username, role, password=None, user_id=None):
@@ -35,6 +37,6 @@ class User:
         self.password = bcrypt.hashpw(new_password.encode("utf-8"),
                                       bcrypt.gensalt()).decode("utf-8")
         return self
-    
-    def is_employee(self): 
+
+    def is_employee(self):
         return self.role == UserRole.EMPLOYEE

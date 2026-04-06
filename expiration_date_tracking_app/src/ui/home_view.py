@@ -34,17 +34,15 @@ class HomeView():
         self._status_label = ttk.Label(
             master=self._frame, text="Loading user...")
         self._stores_frame = ttk.Frame(master=self._frame)
-        
 
         self._title.grid(row=0, column=0, sticky="NW", pady=(0, 10))
         self._status_label.grid(row=1, column=0, sticky="NW", pady=(0, 10))
         self._stores_frame.grid(row=2, column=0, sticky="NW")
         self._frame.rowconfigure(3, weight=1)
-        
+
         self._logout_button.grid(
             row=4, column=2, sticky=constants.E, pady=(5, 0))
 
-        
     def show_manage_buttons(self):
         self._add_store_button = ttk.Button(
             master=self._frame, text="Add store", command=self._show_add_store_entry)
@@ -58,7 +56,6 @@ class HomeView():
             row=4, column=0, sticky=constants.EW, pady=(5, 0))
         self._add_employee_button.grid(
             row=4, column=1, sticky=constants.W, pady=(5, 0))
-
 
     def set_user(self, user):
         self._user = user

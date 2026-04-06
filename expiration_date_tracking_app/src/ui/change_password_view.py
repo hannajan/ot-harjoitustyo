@@ -59,5 +59,6 @@ class ChangePasswordView():
         new_password_entry.focus()
 
     def _handle_change_password(self):
-        user_service.update_employee_password(self._entry_password.get().strip())
+        user_service.update_employee_password(
+            self._entry_password.get().strip())
         self._show_home_view()
