@@ -28,8 +28,12 @@ def create_tables(connection):
         CREATE TABLE users (
             user_id TEXT PRIMARY KEY,
             username TEXT UNIQUE NOT NULL,
-            password_hash TEXT NOT NULL,
-            role TEXT NOT NULL CHECK (role IN ('merchant', 'employee'))
+            password TEXT NOT NULL,
+            role TEXT NOT NULL CHECK (role IN ('merchant', 'employee')),
+            password_is_temporary INTEGER NOT NULL,
+            employer_id TEXT NULL,
+            CONSTRAINT foreignkey_employer
+                FOREIGN KEY (employer_id) REFERENCES users(user_id)
         );
     ''')
 
@@ -40,6 +44,13 @@ def create_tables(connection):
         owner_id TEXT NOT NULL,
         FOREIGN KEY (owner_id) REFERENCES users(user_id)
         );
+    ''')
+
+    connection.commit()
+
+    cursor.execute('''
+        CREATE INDEX IF NOT EXISTS idx_users_employer_id
+        ON users(employer_id)
     ''')
 
     connection.commit()

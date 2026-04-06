@@ -1,17 +1,29 @@
 from database_connection import get_database_connection
 
 from entities.user import User
+from entities.merchant import Merchant
+from entities.employee import Employee
+from entities.user_role import UserRole
 
 
 def get_user_by_row(row):
     if row:
-        return User(
-            user_id=row["user_id"],
-            username=row["username"],
-            password_hash=row["password_hash"],
-            role=row["role"]
-        )
-
+        if row["role"] == UserRole.MERCHANT:
+            user = Merchant(
+                user_id=row["user_id"],
+                username=row["username"],
+                password=row["password"],
+            )
+            return user
+        if row["role"] == UserRole.EMPLOYEE:
+            user = Employee(
+                user_id=row["user_id"],
+                username=row["username"],
+                password=row["password"],
+                employer_id=row["employer_id"]
+            )
+            user.password_is_temporary = bool(row["password_is_temporary"])
+            return user
     return None
 
 
@@ -22,9 +34,22 @@ class UserRepository:
     def create(self, user):
         cursor = self._connection.cursor()
 
+        password_is_temporary = int(user.password_is_temporary) if hasattr(
+            user, 'password_is_temporary') else 0
+        employer_id = None if user.role == UserRole.MERCHANT else user.employer_id
+
         cursor.execute(
-            "INSERT INTO users (user_id, username, password_hash, role) VALUES (?, ?, ?, ?)",
-            (user.user_id, user.username, user.password_hash, user.role)
+            "INSERT INTO users "
+            "(user_id, username, password, role, password_is_temporary, employer_id) "
+            "VALUES (?, ?, ?, ?, ?, ?)",
+            (
+                user.user_id,
+                user.username,
+                user.password,
+                user.role,
+                password_is_temporary,
+                employer_id
+            )
         )
 
         self._connection.commit()
@@ -68,6 +93,28 @@ class UserRepository:
         row = cursor.fetchone()
 
         return get_user_by_row(row)
+
+    def update_password(self, user_id, new_password, password_is_temporary):
+        cursor = self._connection.cursor()
+
+        cursor.execute(
+            "UPDATE users "
+            "SET password = ?, password_is_temporary = ? "
+            "WHERE user_id = ?",
+            (new_password, int(password_is_temporary), user_id)
+        )
+
+        self._connection.commit()
+
+    def find_all_by_employer_id(self, employer_id):
+        cursor = self._connection.cursor()
+        cursor.execute(
+            "SELECT * FROM users WHERE employer_id = ?",
+            (employer_id,)
+        )
+        rows = cursor.fetchall()
+
+        return [get_user_by_row(dict(row)) for row in rows]
 
 
 user_repository = UserRepository(get_database_connection())

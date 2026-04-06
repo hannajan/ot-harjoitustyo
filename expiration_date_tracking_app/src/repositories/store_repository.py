@@ -61,4 +61,5 @@ class StoreRepository:
 
         return [get_store_by_row(row) for row in rows]
 
+
 store_repository = StoreRepository(get_database_connection())
