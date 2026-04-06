@@ -6,6 +6,7 @@
 [Vaatimusmäärittely](https://github.com/hannajan/ot-harjoitustyo/blob/master/expiration_date_tracking_app/dokumentaatio/vaatimusmaarittely.md)    
 [Työaikakirjanpito](https://github.com/hannajan/ot-harjoitustyo/blob/master/expiration_date_tracking_app/dokumentaatio/tyoaikakirjanpito.md)  
 [Changelog](https://github.com/hannajan/ot-harjoitustyo/blob/master/expiration_date_tracking_app/dokumentaatio/changelog.md)  
+[Arkkitehtuuri](https://github.com/hannajan/ot-harjoitustyo/blob/master/expiration_date_tracking_app/dokumentaatio/arkkitehtuuri.md)  
 
 
 ## Asennus
@@ -48,4 +49,19 @@ Testikattavuusraportin saa generoitua komennolla:
 poetry run invoke coverage-report
 ```
 
-Selaimessa avattava raportti löytyy _index.html_ tiedostosta, joka generoituu _htmlcov_-hakemistoon.
+Selaimessa avattava raportti löytyy _index.html_ tiedostosta, joka generoituu _htmlcov_-hakemistoon.  
+
+### Staattinen analyysi
+
+Pylintin saa ajettua komennolla:
+
+```bash
+poetry run invoke lint
+```
+
+Koodin automaattinen formatointi tehdään komennolla:
+
+
+```bash
+poetry run invoke format
+```
