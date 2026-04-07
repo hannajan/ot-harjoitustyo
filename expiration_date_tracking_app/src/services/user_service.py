@@ -89,7 +89,7 @@ class UserService:
         return password
 
     def update_employee_password(self, new_password):
-        if not self._user.role == UserRole.EMPLOYEE:
+        if self._user.role != UserRole.EMPLOYEE:
             raise ValueError("User role is not employee")
 
         if not self.validate_password(new_password):
