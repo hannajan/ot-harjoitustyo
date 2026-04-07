@@ -13,5 +13,5 @@
 | 4.4. | 6 | Tietokantaan stores-taulu ja kaupan luokka, repositoria ja service, käyttöliittymän home-näkymään listaus ja mahdollisuus luoda kauppa, testit User-luokalle, repositorioille ja UserService-luokalle |
 | 5.4. | 5.5 | Arkkitehtuuri.md -luotu ja aloitettu luokkakaavion kirjoittaminen, Employee luonti, tietokannan taulujen muokkaus, kertakirjautumissalasanan luonti ja näkymät Employees ja ChangePassword |
 | 6.4. | 1.5 | Refaktorointia, debuggailua ja salasanan uusimisen tallennus tietokantaan, dokunmentaatiota päivitetty ajantasalle |
-| 7.4. | 2 | Rekisteröitymisnäkymään salasanan varmistus ja back-nappi, salasanan vaihtonäkymään varmistus, dokumentaatioon vaatimusmäärittelyyn päivitetty tehdyksi, kirjoitettu lisää testejä |
-| yht. | 32 | 
+| 7.4. | 2.5 | Rekisteröitymisnäkymään salasanan varmistus ja back-nappi, salasanan vaihtonäkymään varmistus, dokumentaatioon vaatimusmäärittelyyn päivitetty tehdyksi, kirjoitettu lisää testejä |
+| yht. | 32.5 | 
