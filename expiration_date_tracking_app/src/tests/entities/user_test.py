@@ -42,3 +42,17 @@ class TestUser(unittest.TestCase):
 
         self.assertEqual(self.user.check_password("Password"), False)
         self.assertEqual(self.user.check_password("NewPassword"), True)
+
+    def test_hashed_password_is_not_hashed_again(self):
+        testuser = User(username=self.user.username, password=self.user.password, role=UserRole.MERCHANT)
+        password = self.user.password
+        bytes_password = password.encode('utf-8')
+        testuser2 = User(username=self.user.username, password=bytes_password, role=UserRole.MERCHANT)
+        self.assertEqual(testuser.password, password)
+        self.assertEqual(testuser2.password.decode('utf-8'), password)
+
+    def test_bytes_password_is_hashed(self):
+        password = "password".encode('utf-8')
+        user = User(username="name", password=password, role=UserRole.MERCHANT )
+
+        self.assertNotEqual(user.password, password)
