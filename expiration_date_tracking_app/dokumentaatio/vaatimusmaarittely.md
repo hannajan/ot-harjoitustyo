@@ -28,6 +28,7 @@ Myöhemmin sovellukseen saatetaan vielä lisätä _pääkäyttäjä_, jolla on k
 - [x] voi luoda kaupan
 - [x] voi lisätä työntekijän
   - [x] sovellus luo alustavan salasanan työntekijälle, jonka tulee vaihtaa salasana ensimmäisen kirjautumisen yhteydessä.
+  - [x] salasana on syötettävä kahdesti ja oltava sama ja vähintään 8 merkkiä pitkä
 - [ ] voi lisätä työntekijälle käyttöoikeudet kauppaan ja poistaa käyttöoikeudet.
 
 #### Kauppias tai työntekijä
