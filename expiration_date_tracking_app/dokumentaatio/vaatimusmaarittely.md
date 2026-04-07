@@ -17,6 +17,8 @@ Myöhemmin sovellukseen saatetaan vielä lisätä _pääkäyttäjä_, jolla on k
   - [x] _Työntekijäroolin_ tunnuksia ei voi luoda, vaan ne luo sovellukseen kirjautunut kauppias.
   - [x] Etusivulla on _rekisteröidy_ linkki, jota klikkaamalla aukeaa rekisteröitymislomake.
   -  [x] Käyttäjätunnuksen on oltava uniikki ja vähintään 5 merkkiä pitkä.
+  - [x] Salasana on syötettävä kahdesti ja oltava sama ja vähintään 8 merkkiä pitkä
+  - [x] Jos rekisteröityminen ei onnistu annetaan virheilmoitus, jossa kerrotaan syy.
 - [x] _Kauppias_ tai _työntekijä_ voi kirjautua sisään sovellukseen.
   - [x] Etusivulla on kirjautumislomake, johon syötetään käyttäjätunnus ja salasana.
   - [x] Jos kirjautuminen ei onnistu annetaan virheilmoitus, jossa kerrotaan syy.
