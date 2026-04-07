@@ -50,7 +50,6 @@ class LoginView():
         label_password = ttk.Label(master=self._frame, text="Password")
         self._entry_password = ttk.Entry(master=self._frame, show="*")
         self._status_label = ttk.Label(self._frame, text="")
-        self._status_label.grid(row=4, column=0, columnspan=2, pady=5)
 
         login_button = ttk.Button(
             master=self._frame,
@@ -70,4 +69,5 @@ class LoginView():
         label_password.grid(row=2, column=0, padx=5, pady=5)
         self._entry_password.grid(row=2, column=1, padx=5, pady=5)
         login_button.grid(row=3, column=0, columnspan=2, pady=10)
+        self._status_label.grid(row=4, column=0, columnspan=2, pady=5)
         register_button.grid(padx=5, pady=5, sticky=constants.EW)
