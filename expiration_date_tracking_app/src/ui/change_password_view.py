@@ -29,7 +29,13 @@ class ChangePasswordView():
 
         username_label = ttk.Label(
             master=self._frame,
-            text=f"Username: {user.username}"
+            text=f"Username:"
+        )
+
+        username_bold = ttk.Label(
+            master=self._frame,
+            text=f"{user.username}",
+            font=(None, 14, "bold")
         )
 
         new_password_label = ttk.Label(
@@ -44,21 +50,55 @@ class ChangePasswordView():
             show="*"
         )
 
+        confirm_password_label = ttk.Label(
+            master=self._frame,
+            text="Confirm password:"
+        )
+
+        self._entry_password_confirm = StringVar()
+        confirm_password_entry = ttk.Entry(
+            master=self._frame,
+            textvariable=self._entry_password_confirm,
+            show="*"
+        )
+
+        self._error_message = ttk.Label(
+            master=self._frame,
+            text=""
+        )
+
         submit_button = ttk.Button(
             master=self._frame,
             text="Change Password",
             command=self._handle_change_password
         )
-        submit_button.grid(row=3, column=0, columnspan=2,
-                           pady=(10, 0), sticky="EW")
 
-        title.grid(row=0, column=0, columnspan=2, sticky="W", pady=(0, 10))
-        username_label.grid(row=1, column=0, sticky="W", padx=(0, 2))
-        new_password_label.grid(row=2, column=0, sticky="W", padx=(0, 2))
-        new_password_entry.grid(row=2, column=1, sticky="EW", padx=(0, 2))
+        title.grid(row=0, column=0, columnspan=2, sticky="W", pady=(5, 10))
+        username_label.grid(row=1, column=0, sticky="EW", padx=(5, 2))
+        username_bold.grid(row=1, column=1, sticky="EW", padx=(5, 2))
+        new_password_label.grid(row=2, column=0, sticky="EW", padx=(5, 2))
+        new_password_entry.grid(row=2, column=1, sticky="EW", padx=(5, 2))
+        confirm_password_label.grid(row=3, column=0, sticky="EW", padx=(5, 2))
+        confirm_password_entry.grid(row=3, column=1, sticky="EW", padx=(5, 2))
+        self._error_message.grid(row=4, column=0, columnspan=2, pady=(5,2))
+        submit_button.grid(row=5, column=0, pady=(10, 2), padx=(5,5), sticky="EW")
         new_password_entry.focus()
 
     def _handle_change_password(self):
-        user_service.update_employee_password(
-            self._entry_password.get().strip())
-        self._show_home_view()
+        password = self._entry_password.get().strip()
+        password_confirm = self._entry_password_confirm.get().strip()
+
+        try:
+            self._do_password_change(password, password_confirm)
+        except ValueError as error:
+            self._error_message.config(text=f"Error: {error}")
+
+    def _do_password_change(self, password, password_confirm):
+        if password != password_confirm:
+            raise ValueError("Passwords don't match")
+        
+        try:
+            user_service.update_employee_password(password)
+            self._show_home_view()
+        except ValueError as error:
+            self._error_message.config(text=f"Error: {error}")
