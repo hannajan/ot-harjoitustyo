@@ -2,6 +2,7 @@ import unittest
 from repositories.user_repository import user_repository
 from repositories.store_repository import store_repository
 from entities.merchant import Merchant
+from entities.employee import Employee
 
 
 class TestUserRepository(unittest.TestCase):
@@ -41,3 +42,23 @@ class TestUserRepository(unittest.TestCase):
         user = user_repository.get_user_by_id(self.merchant3.user_id)
 
         self.assertEqual(user.username, "merchant_test")
+
+    def test_update_password_works(self):
+        merchant = user_repository.create(self.merchant)
+        employee = Employee("employee", "password", merchant.user_id)
+        created_employee = user_repository.create(employee)
+        user_repository.update_password(created_employee.user_id, "newpassword", False)
+        found_employee = user_repository.get_user_by_id(created_employee.user_id)
+        self.assertEqual(found_employee.check_password("password"), False)
+        self.assertEqual(found_employee.check_password("newpassword"), True)
+
+    def test_find_all_by_employer_id_works(self):
+        merchant = user_repository.create(self.merchant)
+        user_repository.create(Employee("worker", "password", merchant.user_id))
+        user_repository.create(Employee("employee", "secret123", merchant.user_id))
+
+        employees = user_repository.find_all_by_employer_id(merchant.user_id)
+
+        self.assertEqual(len(employees), 2)
+        self.assertEqual(employees[0].username, "worker")
+        self.assertEqual(employees[1].username, "employee")
