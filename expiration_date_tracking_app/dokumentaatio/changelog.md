@@ -15,3 +15,7 @@
 - Sovellus luo kertakirjautumissalasanan työntekijälle
 - Työntekijä pystyy vaihtamaan salasanan ja kirjautumaan sisään
 - Testattu User, StoreRepository ja UserService-luokkia
+
+## Viikko 5
+- Testattu loput olemassa olevat luokat
+- Tehty käyttöliittymään EmployeeView, jossa voi muokata käyttäjän oikeuksia kauppaan

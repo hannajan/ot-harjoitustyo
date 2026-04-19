@@ -2,6 +2,7 @@ from entities.merchant import Merchant
 from entities.employee import Employee
 from entities.user_role import UserRole
 from entities.temporary_password import TemporaryPassword
+from entities.permission import Permission
 
 from repositories.user_repository import (
     user_repository as default_user_repository
@@ -113,10 +114,10 @@ class UserService:
         self._user = None
 
     def get_employee_store_role(self, employee_id, store_id):
-        return "view"
+        return Permission.VIEW
 
-    def set_employee_store_role(self, employee_id, store_id, role):
-        print(f"Set role: {employee_id} -> {store_id} = {role}")
+    def set_employee_store_role(self, employee_id, store_id, permission):
+        print(f"Set role: {employee_id} -> {store_id} = {permission}")
 
 
 user_service = UserService()

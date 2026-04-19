@@ -57,7 +57,7 @@ class EmployeeView:
 
         stores = store_service.get_stores_by_owner(self._user.user_id)
 
-        ROLES = ["view", "edit", "manage"]
+        ROLES = ["noaccess", "view", "edit", "manage"]
 
         for i, store in enumerate(stores):
             store_label = ttk.Label(
