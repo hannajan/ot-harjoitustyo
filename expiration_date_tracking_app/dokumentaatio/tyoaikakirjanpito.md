@@ -15,4 +15,5 @@
 | 6.4. | 1.5 | Refaktorointia, debuggailua ja salasanan uusimisen tallennus tietokantaan, dokunmentaatiota päivitetty ajantasalle |
 | 7.4. | 2.5 | Rekisteröitymisnäkymään salasanan varmistus ja back-nappi, salasanan vaihtonäkymään varmistus, dokumentaatioon vaatimusmäärittelyyn päivitetty tehdyksi, kirjoitettu lisää testejä |
 | 8.4. | 1.5 | Lisää testejä UserService-luokalle ja testit StoreService-luokalle |
-| yht. | 34 | 
+| 19.4. | 1 | EmployeeView-luokka, refaktorointia |
+| yht. | 35 | 
