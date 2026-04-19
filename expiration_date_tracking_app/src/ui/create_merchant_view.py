@@ -1,6 +1,7 @@
 from tkinter import ttk, constants
 from services.user_service import user_service
 
+
 class CreateMerchantView:
     def __init__(self, root, handle_show_login_view):
         self._root = root
@@ -43,9 +44,11 @@ class CreateMerchantView:
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
-        title = ttk.Label(master=self._frame, text="Register as merchant", font=(None, 24, "bold"))
+        title = ttk.Label(master=self._frame,
+                          text="Register as merchant", font=(None, 24, "bold"))
 
-        back_button = ttk.Button(master=self._frame, text="Back", command=self._handle_back)
+        back_button = ttk.Button(
+            master=self._frame, text="Back", command=self._handle_back)
 
         label_username = ttk.Label(master=self._frame, text="Username")
         self._entry_username = ttk.Entry(master=self._frame)
@@ -53,10 +56,12 @@ class CreateMerchantView:
         label_password = ttk.Label(master=self._frame, text="Password")
         self._entry_password = ttk.Entry(master=self._frame, show="*")
 
-        label_password_confirm = ttk.Label(master=self._frame, text="Confirm password")
+        label_password_confirm = ttk.Label(
+            master=self._frame, text="Confirm password")
         self._entry_password_confirm = ttk.Entry(master=self._frame, show="*")
 
-        self._error_message = ttk.Label(master=self._frame, text="", style="Error.Label")
+        self._error_message = ttk.Label(
+            master=self._frame, text="", style="Error.Label")
 
         button = ttk.Button(
             master=self._frame,

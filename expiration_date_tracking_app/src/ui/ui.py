@@ -4,6 +4,7 @@ from ui.login_view import LoginView
 from ui.home_view import HomeView
 from ui.employees_view import EmployeesView
 from ui.change_password_view import ChangePasswordView
+from ui.employee_view import EmployeeView
 from services.user_service import user_service
 
 
@@ -52,7 +53,8 @@ class UI:
 
         self._current_view = CreateMerchantView(
             self._root,
-            self._show_login_view
+            self._show_login_view,
+            self.show_employee_view
         )
 
         self._current_view.pack()
@@ -62,7 +64,19 @@ class UI:
 
         self._current_view = EmployeesView(
             self._root,
-            self._show_home_view
+            self._show_home_view,
+            self._show_employee_view
+        )
+
+        self._current_view.pack()
+
+    def _show_employee_view(self, employee):
+        self._hide_current_view()
+
+        self._current_view = EmployeeView(
+            self._root,
+            employee,
+            self._show_employees_view
         )
 
         self._current_view.pack()

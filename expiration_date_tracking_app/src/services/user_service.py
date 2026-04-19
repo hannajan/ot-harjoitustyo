@@ -112,5 +112,11 @@ class UserService:
     def logout(self):
         self._user = None
 
+    def get_employee_store_role(self, employee_id, store_id):
+        return "view"
+
+    def set_employee_store_role(self, employee_id, store_id, role):
+        print(f"Set role: {employee_id} -> {store_id} = {role}")
+
 
 user_service = UserService()

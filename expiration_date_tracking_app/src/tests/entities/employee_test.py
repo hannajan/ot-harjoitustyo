@@ -2,8 +2,9 @@ import unittest
 from entities.employee import Employee
 from entities.user_role import UserRole
 
+
 class TestEmployee(unittest.TestCase):
-    
+
     def test_created_employee_has_correct_attributes(self):
         employee = Employee("test-employee", "password", "id123")
 

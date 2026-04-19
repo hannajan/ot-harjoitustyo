@@ -30,19 +30,18 @@ class MockUserRepository:
             filter(lambda user: user.user_id == user_id, self.users))
 
         return found_users[0] if len(found_users) > 0 else None
-    
+
     def find_all_by_employer_id(self, employer_id):
         found_users = list(
             filter(lambda user: user.employer_id == employer_id, self.users))
-        
+
         return found_users
-    
+
     def update_password(self, user_id, new_password, password_is_temporary):
         user = self.get_user_by_id(user_id)
 
         user.password = new_password
         user.password_is_temporary = password_is_temporary
-
 
 
 class TestUserService(unittest.TestCase):
@@ -134,7 +133,8 @@ class TestUserService(unittest.TestCase):
         self.user_service.register_merchant("Merchant", "Password")
         user = self.user_service.login("Merchant", "Password")
 
-        temporary_password = self.user_service.create_new_employee("test-employee")
+        temporary_password = self.user_service.create_new_employee(
+            "test-employee")
 
         employees = self.user_service.get_employees()
 
@@ -153,7 +153,8 @@ class TestUserService(unittest.TestCase):
         self.user_service.register_merchant("Merchant", "Password")
         user = self.user_service.login("Merchant", "Password")
 
-        temporary_password = self.user_service.create_new_employee("test-employee")
+        temporary_password = self.user_service.create_new_employee(
+            "test-employee")
         employee = self.user_service.get_employees()[0]
 
         self.user_service.logout()
@@ -171,13 +172,15 @@ class TestUserService(unittest.TestCase):
         self.user_service.register_merchant("Merchant", "Password")
         user = self.user_service.login("Merchant", "Password")
 
-        temporary_password = self.user_service.create_new_employee("test-employee")
+        temporary_password = self.user_service.create_new_employee(
+            "test-employee")
         employee = self.user_service.get_employees()[0]
 
         self.user_service.logout()
         self.user_service.login(employee.username, temporary_password)
         self.user_service.update_employee_password("NewPassword")
-        self.assertEqual(self.user_service.get_current_user().check_password("NewPassword"), True)
+        self.assertEqual(self.user_service.get_current_user(
+        ).check_password("NewPassword"), True)
 
     def test_update_employee_password_fails_when_merchant_logged_in(self):
         self.user_service.register_merchant("Merchant", "Password")
@@ -189,6 +192,5 @@ class TestUserService(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Wrong username or password"):
             self.user_service.login("Merchant", "NewPassword")
         self.user_service.login("Merchant", "Password")
-        self.assertEqual(self.user_service.get_current_user().username, "Merchant")
-
-
+        self.assertEqual(
+            self.user_service.get_current_user().username, "Merchant")

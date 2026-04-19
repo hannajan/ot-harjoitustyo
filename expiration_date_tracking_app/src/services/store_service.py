@@ -10,7 +10,11 @@ from services.user_service import (
 
 
 class StoreService:
-    def __init__(self, store_repository=default_store_repository, user_service=default_user_service):
+    def __init__(
+            self,
+            store_repository=default_store_repository,
+            user_service=default_user_service
+        ):
         self._store_repository = store_repository
         self._user_service = user_service
 

@@ -80,8 +80,9 @@ class ChangePasswordView():
         new_password_entry.grid(row=2, column=1, sticky="EW", padx=(5, 2))
         confirm_password_label.grid(row=3, column=0, sticky="EW", padx=(5, 2))
         confirm_password_entry.grid(row=3, column=1, sticky="EW", padx=(5, 2))
-        self._error_message.grid(row=4, column=0, columnspan=2, pady=(5,2))
-        submit_button.grid(row=5, column=0, pady=(10, 2), padx=(5,5), sticky="EW")
+        self._error_message.grid(row=4, column=0, columnspan=2, pady=(5, 2))
+        submit_button.grid(row=5, column=0, pady=(
+            10, 2), padx=(5, 5), sticky="EW")
         new_password_entry.focus()
 
     def _handle_change_password(self):
@@ -96,7 +97,7 @@ class ChangePasswordView():
     def _do_password_change(self, password, password_confirm):
         if password != password_confirm:
             raise ValueError("Passwords don't match")
-        
+
         try:
             user_service.update_employee_password(password)
             self._show_home_view()

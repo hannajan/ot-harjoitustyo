@@ -5,9 +5,10 @@ from services.user_service import user_service
 
 
 class EmployeesView:
-    def __init__(self, root, show_home_view):
+    def __init__(self, root, show_home_view, show_employee_view):
         self._root = root
         self._show_home_view = show_home_view
+        self._show_employee_view = show_employee_view
         self._frame = None
         self._employees_frame = None
         self._employees = []
@@ -53,6 +54,9 @@ class EmployeesView:
 
     def _handle_back(self):
         self._show_home_view()
+
+    def _handle_employee_click(self, employee):
+        self._show_employee_view(employee)
 
     def _show_add_employee_entry(self):
         if self._add_employee_shown:
@@ -120,7 +124,20 @@ class EmployeesView:
             label = ttk.Label(
                 self._employees_frame,
                 text=emp.username,
-                font=(None, 12, "bold")
+                font=(None, 12, "bold"),
+                cursor="arrow"
             )
+
             label.grid(row=i, column=0, sticky="W", pady=2)
+            label.bind("<Button-1>", lambda event, e=emp: self._handle_employee_click(e)
+                       )
+            label.bind("<Enter>", self._on_employee_hover)
+            label.bind("<Leave>", self._on_employee_leave)
+
             self._employees.append(label)
+
+    def _on_employee_hover(self, event):
+        event.widget.config(font=(None, 12, "bold", "underline"))
+
+    def _on_employee_leave(self, event):
+        event.widget.config(font=(None, 12, "bold"))
