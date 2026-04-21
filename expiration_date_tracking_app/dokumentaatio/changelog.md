@@ -18,6 +18,7 @@
 
 ## Viikko 5
 - Testattu loput olemassa olevat luokat
-- Tehty käyttöliittymään EmployeeView, jossa voi muokata käyttäjän oikeuksia kauppaan
-- Tehty tietokantaan taulu työntekijän kauppakohtaisista oikeuksista
+- Tehty käyttöliittymään EmployeeView, jossa kauppias voi muokata käyttäjän oikeuksia kauppaan
+- Tehty tietokantaan oma taulu työntekijän kauppakohtaisista oikeuksista
+- Tehty PermissionRepository, joka vastaa oikeuksiin liittyvistä tietokantahauista ja tallennuksista
 - Otettu oikeudet käyttöön ja työntekijän kotinäkymä listaa ne kaupat, joihin on oikeus
