@@ -1,6 +1,7 @@
 from tkinter import ttk, constants, StringVar
 from services.store_service import store_service
 from services.user_service import user_service
+from entities.permission import Permission
 
 # generoitu tekoälyllä
 
@@ -57,7 +58,12 @@ class EmployeeView:
 
         stores = store_service.get_stores_by_owner(self._user.user_id)
 
-        ROLES = ["noaccess", "view", "edit", "manage"]
+        PERMISSIONS = [
+            Permission.EDIT,
+            Permission.VIEW,
+            Permission.MANAGE,
+            Permission.NOACCESS
+        ]
 
         for i, store in enumerate(stores):
             store_label = ttk.Label(
@@ -66,7 +72,7 @@ class EmployeeView:
                 font=(None, 12, "bold")
             )
 
-            current_role = user_service.get_employee_store_role(
+            current_role = user_service.get_employee_store_permission(
                 self._employee.user_id,
                 store.store_id
             )
@@ -79,7 +85,7 @@ class EmployeeView:
                 self._stores_frame,
                 role_var,
                 role_var.get(),
-                *ROLES,
+                *PERMISSIONS,
                 command=lambda value, s=store: self._handle_role_change(
                     s, value)
             )
@@ -91,7 +97,7 @@ class EmployeeView:
 
     def _handle_role_change(self, store, role):
         try:
-            user_service.set_employee_store_role(
+            user_service.set_employee_store_permission(
                 self._employee.user_id,
                 store.store_id,
                 role

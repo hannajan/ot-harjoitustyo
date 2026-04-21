@@ -74,7 +74,10 @@ class HomeView():
             store.destroy()
         self._stores = []
 
-        stores = store_service.get_stores_by_owner(self._user.user_id)
+        if self._user.is_employee():
+            stores = user_service.get_employee_stores(self._user.user_id)
+        else:
+            stores = store_service.get_stores_by_owner(self._user.user_id)
 
         if not stores:
             print("No stores")

@@ -8,10 +8,14 @@ from repositories.user_repository import (
     user_repository as default_user_repository
 )
 
+from repositories.permission_repository import (
+    permission_repository as default_permission_repository
+)
 
 class UserService:
-    def __init__(self, user_repository=default_user_repository):
+    def __init__(self, user_repository=default_user_repository, permission_repository=default_permission_repository):
         self._user_repository = user_repository
+        self._permission_repository = permission_repository
         self._user = None
 
     def validate_username(self, username):
@@ -113,11 +117,25 @@ class UserService:
     def logout(self):
         self._user = None
 
-    def get_employee_store_role(self, employee_id, store_id):
-        return Permission.VIEW
+    def get_employee_store_permission(self, employee_id, store_id):
+        return self._permission_repository.find_permission(employee_id, store_id) 
 
-    def set_employee_store_role(self, employee_id, store_id, permission):
-        print(f"Set role: {employee_id} -> {store_id} = {permission}")
+    def set_employee_store_permission(self, employee_id, store_id, permission):
+        self._permission_repository.set_permission(employee_id, store_id, permission)
+
+    def get_employee_stores(self, employee_id):
+        from services.store_service import store_service
+        
+        permissions = self._permission_repository.find_permissions_by_employee_id(employee_id)
+
+        stores = []
+        for permission in permissions:
+            if permission["permission"] != Permission.NOACCESS:
+                store = store_service.get_store_by_id(permission["store_id"])
+                if store:
+                    stores.append(store)
+
+        return stores
 
 
 user_service = UserService()

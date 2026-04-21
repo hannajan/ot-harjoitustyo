@@ -2,4 +2,4 @@ class Permission:
     VIEW = "view"
     EDIT = "edit"
     MANAGE = "manage"
-    NOACCESS = "noaccess"
+    NOACCESS = "no access"

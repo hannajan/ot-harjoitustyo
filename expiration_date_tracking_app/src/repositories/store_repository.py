@@ -29,6 +29,18 @@ class StoreRepository:
         self._connection.commit()
 
         return store
+    
+    def find_by_id(self, store_id):
+        cursor = self._connection.cursor()
+
+        cursor.execute(
+            "SELECT * FROM stores WHERE store_id = ?",
+            (store_id,)
+        )
+
+        row = cursor.fetchone()
+
+        return get_store_by_row(row)
 
     def find_all_by_owner_id(self, owner_id):
         cursor = self._connection.cursor()

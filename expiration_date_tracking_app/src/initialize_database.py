@@ -7,6 +7,12 @@ def drop_tables(connection):
     cursor.execute("PRAGMA foreign_keys = ON;")
 
     cursor.execute('''
+        DROP TABLE IF EXISTS employee_store_permissions;
+    ''')
+
+    connection.commit()
+
+    cursor.execute('''
       DROP TABLE IF EXISTS stores;
     ''')
 
@@ -51,6 +57,19 @@ def create_tables(connection):
     cursor.execute('''
         CREATE INDEX IF NOT EXISTS idx_users_employer_id
         ON users(employer_id)
+    ''')
+
+    connection.commit()
+
+    cursor.execute('''
+        CREATE TABLE employee_store_permissions (
+        employee_id INTEGER,
+        store_id INTEGER,
+        permission TEXT NOT NULL,
+        PRIMARY KEY (employee_id, store_id),
+        FOREIGN KEY (employee_id) REFERENCES users(user_id),
+        FOREIGN KEY (store_id) REFERENCES stores(store_id)
+    );
     ''')
 
     connection.commit()

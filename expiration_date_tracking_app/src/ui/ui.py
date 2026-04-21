@@ -53,8 +53,7 @@ class UI:
 
         self._current_view = CreateMerchantView(
             self._root,
-            self._show_login_view,
-            self.show_employee_view
+            self._show_login_view
         )
 
         self._current_view.pack()
