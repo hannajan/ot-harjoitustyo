@@ -17,6 +17,7 @@
 ```bash
 poetry install
 ```
+Komennot tulee suorittaa _expiration_date_tracking_app_-hakemiston sisällä
 
 2. Alustus tehdään komennolla:
 
