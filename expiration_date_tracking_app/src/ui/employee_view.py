@@ -5,6 +5,7 @@ from entities.permission import Permission
 
 # generoitu tekoälyllä
 
+
 class EmployeeView:
     def __init__(self, root, employee, show_employees_view):
         self._root = root

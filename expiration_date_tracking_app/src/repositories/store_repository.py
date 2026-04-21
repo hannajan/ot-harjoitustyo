@@ -29,7 +29,7 @@ class StoreRepository:
         self._connection.commit()
 
         return store
-    
+
     def find_by_id(self, store_id):
         cursor = self._connection.cursor()
 

@@ -11,10 +11,10 @@ from services.user_service import (
 
 class StoreService:
     def __init__(
-            self,
-            store_repository=default_store_repository,
-            user_service=default_user_service
-        ):
+        self,
+        store_repository=default_store_repository,
+        user_service=default_user_service
+    ):
         self._store_repository = store_repository
         self._user_service = user_service
 
@@ -34,7 +34,7 @@ class StoreService:
 
     def get_stores_by_owner(self, owner_id):
         return self._store_repository.find_all_by_owner_id(owner_id)
-    
+
     def get_store_by_id(self, store_id):
         return self._store_repository.find_by_id(store_id)
 

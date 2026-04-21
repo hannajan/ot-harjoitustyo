@@ -1,10 +1,10 @@
 from database_connection import get_database_connection
 from entities.permission import Permission
 
+
 class PermissionRepository:
     def __init__(self, connection):
         self._connection = connection
-
 
     def find_permission(self, employee_id, store_id):
         cursor = self._connection.cursor()
@@ -22,7 +22,7 @@ class PermissionRepository:
             return row["permission"]
 
         return Permission.NOACCESS
-    
+
     def set_permission(self, employee_id, store_id, permission):
         cursor = self._connection.cursor()
         cursor.execute(
@@ -48,5 +48,6 @@ class PermissionRepository:
         rows = cursor.fetchall()
 
         return [dict(row) for row in rows]
+
 
 permission_repository = PermissionRepository(get_database_connection())

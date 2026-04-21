@@ -75,9 +75,18 @@ class HomeView():
         self._stores = []
 
         if self._user.is_employee():
-            stores = user_service.get_employee_stores(self._user.user_id)
+            employee_permissions = user_service.get_employee_permissions(self._user.user_id)
+
+            stores = []
+            for permission_entry in employee_permissions:
+                store_id = permission_entry["store_id"]
+                store = store_service.get_store_by_id(store_id)
+
+                if store:
+                    stores.append(store)
         else:
             stores = store_service.get_stores_by_owner(self._user.user_id)
+
 
         if not stores:
             print("No stores")

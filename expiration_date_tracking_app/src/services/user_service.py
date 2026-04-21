@@ -12,8 +12,13 @@ from repositories.permission_repository import (
     permission_repository as default_permission_repository
 )
 
+
 class UserService:
-    def __init__(self, user_repository=default_user_repository, permission_repository=default_permission_repository):
+    def __init__(
+            self,
+            user_repository=default_user_repository,
+            permission_repository=default_permission_repository
+        ):
         self._user_repository = user_repository
         self._permission_repository = permission_repository
         self._user = None
@@ -118,24 +123,23 @@ class UserService:
         self._user = None
 
     def get_employee_store_permission(self, employee_id, store_id):
-        return self._permission_repository.find_permission(employee_id, store_id) 
+        return self._permission_repository.find_permission(employee_id, store_id)
 
     def set_employee_store_permission(self, employee_id, store_id, permission):
-        self._permission_repository.set_permission(employee_id, store_id, permission)
+        self._permission_repository.set_permission(
+            employee_id, store_id, permission)
 
-    def get_employee_stores(self, employee_id):
-        from services.store_service import store_service
-        
-        permissions = self._permission_repository.find_permissions_by_employee_id(employee_id)
+    def get_employee_permissions(self, employee_id):
+        permissions = self._permission_repository.find_permissions_by_employee_id(
+            employee_id)
 
-        stores = []
-        for permission in permissions:
-            if permission["permission"] != Permission.NOACCESS:
-                store = store_service.get_store_by_id(permission["store_id"])
-                if store:
-                    stores.append(store)
+        valid_permissions = [
+            permission
+            for permission in permissions
+            if permission["permission"] != Permission.NOACCESS
+        ]
 
-        return stores
+        return valid_permissions
 
 
 user_service = UserService()
