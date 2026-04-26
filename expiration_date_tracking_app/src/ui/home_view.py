@@ -4,7 +4,13 @@ from services.store_service import store_service
 
 
 class HomeView():
-    def __init__(self, root, show_employees_view, show_login_view):
+    def __init__(
+        self,
+        root,
+        show_employees_view,
+        show_login_view,
+        show_store_view
+    ):
         self._root = root
         self._frame = None
         self._user = None
@@ -12,6 +18,7 @@ class HomeView():
         self._add_store_shown = False
         self._show_employees_view = show_employees_view
         self._show_login_view = show_login_view
+        self._show_store_view = show_store_view
 
         self._initialize()
 
@@ -75,7 +82,8 @@ class HomeView():
         self._stores = []
 
         if self._user.is_employee():
-            employee_permissions = user_service.get_employee_permissions(self._user.user_id)
+            employee_permissions = user_service.get_employee_permissions(
+                self._user.user_id)
 
             stores = []
             for permission_entry in employee_permissions:
@@ -86,7 +94,6 @@ class HomeView():
                     stores.append(store)
         else:
             stores = store_service.get_stores_by_owner(self._user.user_id)
-
 
         if not stores:
             print("No stores")
@@ -103,7 +110,7 @@ class HomeView():
 
                 store_title.bind(
                     "<Button-1>",
-                    lambda event, store=store: print(f"{store.name} clicked")
+                    lambda event, store=store: self._show_store_view(store)
                 )
                 store_title.bind("<Enter>", self._on_store_hover)
                 store_title.bind("<Leave>", self._on_store_leave)

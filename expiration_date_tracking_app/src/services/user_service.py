@@ -15,10 +15,10 @@ from repositories.permission_repository import (
 
 class UserService:
     def __init__(
-            self,
-            user_repository=default_user_repository,
-            permission_repository=default_permission_repository
-        ):
+        self,
+        user_repository=default_user_repository,
+        permission_repository=default_permission_repository
+    ):
         self._user_repository = user_repository
         self._permission_repository = permission_repository
         self._user = None

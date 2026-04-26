@@ -17,4 +17,5 @@
 | 8.4. | 1.5 | Lisää testejä UserService-luokalle ja testit StoreService-luokalle |
 | 19.4. | 1 | EmployeeView-luokka, refaktorointia |
 | 21.4. | 3 | Kaupan käyttöoikeuksien tallennus tietokantaan ja työntekjän HomeView listaa kaupat, joihin oikeus, refaktoroitu koodia, debuggailua, dokumentaation päivitystä ja sekvenssikaavio, github release |
-| yht. | 38 | 
+| 25.4. | 2 | Osastojen lisäys: tietokantataulu, repositorio, service ja ui-näkymä |
+| yht. | 40 | 

@@ -7,6 +7,18 @@ def drop_tables(connection):
     cursor.execute("PRAGMA foreign_keys = ON;")
 
     cursor.execute('''
+      DROP TABLE IF EXISTS shelves;
+    ''')
+
+    connection.commit()
+
+    cursor.execute('''
+      DROP TABLE IF EXISTS departments;
+    ''')
+
+    connection.commit()
+
+    cursor.execute('''
         DROP TABLE IF EXISTS employee_store_permissions;
     ''')
 
@@ -63,13 +75,37 @@ def create_tables(connection):
 
     cursor.execute('''
         CREATE TABLE employee_store_permissions (
-        employee_id INTEGER,
-        store_id INTEGER,
+        employee_id TEXT,
+        store_id TEXT,
         permission TEXT NOT NULL,
         PRIMARY KEY (employee_id, store_id),
         FOREIGN KEY (employee_id) REFERENCES users(user_id),
         FOREIGN KEY (store_id) REFERENCES stores(store_id)
     );
+    ''')
+
+    connection.commit()
+
+    cursor.execute('''
+        CREATE TABLE departments (
+        department_id TEXT PRIMARY KEY,
+        store_id TEXT NOT NULL,
+        name TEXT NOT NULL,
+        check_days_before INTEGER NOT NULL,
+        FOREIGN KEY (store_id) REFERENCES stores(store_id)
+        );
+    ''')
+
+    connection.commit()
+
+    cursor.execute('''
+        CREATE TABLE shelves (
+        shelf_id TEXT PRIMARY KEY,
+        department_id TEXT NOT NULL,
+        name TEXT NOT NULL,
+        is_default INTEGER NOT NULL DEFAULT 0,
+        FOREIGN KEY (department_id) REFERENCES departments(department_id)
+        );
     ''')
 
     connection.commit()

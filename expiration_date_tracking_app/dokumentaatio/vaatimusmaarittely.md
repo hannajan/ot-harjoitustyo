@@ -33,11 +33,10 @@ Myöhemmin sovellukseen saatetaan vielä lisätä _pääkäyttäjä_, jolla on k
 
 #### Kauppias tai työntekijä
 - [x] näkee listauksen kaupoista
-- [ ] voi lisätä _osaston_ kauppaan 
-  - [ ] voi lisätä _hyllyn_ osastoon
-  - [ ] voi lisätä _hyllyrivin_ hyllyyn (ei pakollinen, oletuksena yksi hyllyrivi)
-  - [ ] voi lisätä _tarkistussäännön_ osastoon, jonka perusteella tuotteita voi tarkastella (esim. 3 päivää ennen)
-  - [ ] voi muokata osaston tietoja (nimeä, hyllyjä...)
+- [x] voi lisätä _osaston_ kauppaan 
+  - [x] voi lisätä _hyllyn_ osastoon
+  - [x] voi lisätä _tarkistussäännön_ osastoon, jonka perusteella tuotteita voi tarkastella (esim. 3 päivää ennen)
+  - [x] voi muokata osaston tietoja (nimeä, hyllyjä...)
 - [ ] voi lisätä _tuotteen_ hyllyyn
   - [ ] tuotteen yksilöivä id on tuotteen _EAN-koodi_
   - [ ] tuotteelle annetaan _nimi_
