@@ -18,4 +18,5 @@
 | 19.4. | 1 | EmployeeView-luokka, refaktorointia |
 | 21.4. | 3 | Kaupan käyttöoikeuksien tallennus tietokantaan ja työntekjän HomeView listaa kaupat, joihin oikeus, refaktoroitu koodia, debuggailua, dokumentaation päivitystä ja sekvenssikaavio, github release |
 | 25.4. | 2 | Osastojen lisäys: tietokantataulu, repositorio, service ja ui-näkymä |
-| yht. | 40 | 
+| 26.4. | 5 | Hyllyjen lisäys: tietokantataulu, repositoria, service ja ui-näkymä. Debuggailua. DocString ja arkkitehtuuridokumentaation päivitystä ja kirjoittamista |
+| yht. | 45 | 
