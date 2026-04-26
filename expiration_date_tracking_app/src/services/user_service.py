@@ -14,34 +14,81 @@ from repositories.permission_repository import (
 
 
 class UserService:
+    """Luokka, joka vastaa käyttöliittymän ja UserRepositoryn välisestä sovelluslogiikasta.
+    """
+
     def __init__(
         self,
         user_repository=default_user_repository,
         permission_repository=default_permission_repository
     ):
+        """Luokan konstruktori.
+
+        Args:
+            user_repository: 
+                UserRepository-olio, joka käyttäjiin liittyvistä 
+                tietokantaoperaatioista vastaava luokka.
+            permission_repository: 
+                PermissionRepository-olio, joka on käyttöoikeuksien 
+                tietokantaoperaatiosita vastaava luokka.
+        """
         self._user_repository = user_repository
         self._permission_repository = permission_repository
         self._user = None
 
     def validate_username(self, username):
-        # username is at least 5 charaters long
+        """Validoi, että käyttäjänimi on tarpeeksi pitkä ja uniikki.
+
+        Args:
+            username: Merkkijono, joka kuvaa käyttäjänimeä.
+
+        Raises:
+            ValueError, jos käyttäjänimi on alle 5 merkkiä pitkä.
+            ValueError, jos käyttäjänimi on jo olemassa.
+
+        Returns:
+            True, jos käyttäjänimen validointi on onnistunut.
+        """
         if len(username) < 5:
             raise ValueError("Username must be at least 5 characters long")
 
-        # username is unique
         if self._user_repository.find_by_username(username):
             raise ValueError("Username already exists")
 
         return True
 
     def validate_password(self, password):
-        # password is at least 8 characters long
+        """Validoi salasanan.
+
+        Args:
+            password: Merkkijono, joka kuvaa salasanaa.
+
+        Raises:
+            ValueError, jos salasana on alle 8 merkkiä pitkä.
+
+        Returns:
+            True, jos salasanan validointi on onnistunut.
+        """
+
         if len(password) < 8:
             raise ValueError("Password must be at least 8 characters long")
 
         return True
 
     def register_merchant(self, username=None, password=None):
+        """Rekisteröi kauppiaan sovellukseen.
+
+        Args:
+            username: Merkkijono, joka kuvaa käyttäjätunnusta.
+            password: Merkkijono, joka kuvaa salasanaa.
+
+        Raises:
+            ValueError, jos käyttäjätunnusta tai salasanaa ei ole syötetty.
+
+        Returns:
+            User-olio, joka on sovellukseen rekisteröity kauppias.
+        """
+
         if not username or not password:
             raise ValueError("Username or password missing")
 
@@ -54,13 +101,27 @@ class UserService:
         return created_user
 
     def login(self, username=None, password=None):
+        """Kirjaa käyttäjän sisään sovellukseen.
+
+        Args:
+            username: Merkkijono, joka on syötetty käyttäjätunnus.
+            password: Merkkijono, joka on syötetty salasana.
+
+        Raises:
+            ValueError, jos käyttäjätunnusta tai salasanaa ei ole syötetty.
+            ValueError, jos käyttäjää ei löydy.
+            ValueError, jos salasana on väärin.
+
+        Returns:
+            _type_: _description_
+        """
         if not username or not password:
             raise ValueError("Username or password missing")
 
         user = self._user_repository.find_by_username(username)
 
         if not user:
-            raise ValueError("User not found")
+            raise ValueError("Wrong username or password")
 
         if user.check_password(password):
             self._user = user
@@ -69,9 +130,25 @@ class UserService:
         raise ValueError("Wrong username or password")
 
     def get_current_user(self):
+        """Palauttaa kirautuneen käyttäjän.
+
+        Returns:
+            User-olio, joka on kirjautunut käyttäjä.
+        """
         return self._user
 
     def get_user_by_id(self, user_id=None):
+        """Palauttaa käyttäjän id:n perusteella.
+
+        Args:
+            user_id: Merkkijono, joka on palautettavan käyttäjän id.
+
+        Raises:
+            ValueError, jos user_id argumentti puuttuu.
+
+        Returns:
+            User-olio.
+        """
         if not user_id:
             raise ValueError("User id missing")
 
@@ -80,6 +157,18 @@ class UserService:
         return user
 
     def create_new_employee(self, username=None):
+        """Luo uuden työntekijän.
+
+        Args:
+            username: Merkkijono, joka kuvaa käyttäjän käyttäjätunnusta.
+
+        Raises:
+            ValueError, jos käyttäjän luonti yrittävän käyttän rooli ei ole kauppias.
+            ValueError, käyttäjätunnusta ei ole annettu argumenttina.
+
+        Returns:
+            Merkkijono, joka on luodun työntekijän kertakäyttösalasana.
+        """
         generator = TemporaryPassword()
 
         current_user = self.get_current_user()
@@ -99,6 +188,15 @@ class UserService:
         return password
 
     def update_employee_password(self, new_password):
+        """Päivittää työntekijän salasanan.
+
+        Args:
+            new_password: Merkkijono, joka on uusi salasana.
+
+        Raises:
+            ValueError, jos käyttäjä, jonka salasaanaa yritetään päivittää ei ole työntekijä.
+            ValueError, jos uusi salasana on alle 8 merkkiä pitkä.
+        """
         if self._user.role != UserRole.EMPLOYEE:
             raise ValueError("User role is not employee")
 
@@ -113,6 +211,11 @@ class UserService:
         )
 
     def get_employees(self):
+        """Palauttaa kirjautuneen käyttäjän työntekijät.
+
+        Returns:
+            Lista Employee-olioita.
+        """
         current_user = self.get_current_user()
         if not current_user or current_user.role != UserRole.MERCHANT:
             return []
@@ -120,16 +223,42 @@ class UserService:
         return self._user_repository.find_all_by_employer_id(current_user.user_id)
 
     def logout(self):
+        """Kirjaa käyttäjän ulos sovelluksesta.
+        """
         self._user = None
 
     def get_employee_store_permission(self, employee_id, store_id):
+        """Palauttaa työntekijän käyttöoikeuden tiettyyn yksittäiseen kauppaan.
+
+        Args:
+            employee_id: Merkkijono, joka on työntekijän id.
+            store_id: Merkkijono, joka on kaupan id.
+
+        Returns:
+            Merkkijono, joka on työntekijän käyttöoikeus yksittäiseen kauppaan.
+        """
         return self._permission_repository.find_permission(employee_id, store_id)
 
     def set_employee_store_permission(self, employee_id, store_id, permission):
+        """Asettaa työntekijän käyttöoikeuden yksittäiseen kauppaan.
+
+        Args:
+            employee_id: Merkkijono, joka on työntekijän id.
+            store_id: Merkkijono, joka on kaupan id.
+            permission: Merkkijono, joka kuvaa käyttöoikeuden tasoa.
+        """
         self._permission_repository.set_permission(
             employee_id, store_id, permission)
 
     def get_employee_permissions(self, employee_id):
+        """Palauttaa kaikki työntekijään liittyvät käyttöoikeudet, jotka antavat katseluoikeuden.
+
+        Args:
+            employee_id: Merkkijono, joka on työntekijän id.
+
+        Returns:
+            Palauttaa listan, jolle on filteröity katseluoikeun antavat käyttöoikeudet.
+        """
         permissions = self._permission_repository.find_permissions_by_employee_id(
             employee_id)
 

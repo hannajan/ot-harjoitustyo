@@ -2,9 +2,23 @@ from tkinter import ttk, StringVar
 from services.user_service import user_service
 from services.department_service import department_service
 
+# Luokan runko generoitu tekoälyllä
+
 
 class StoreView:
+    """Näkymä, joka vastaa kaupan tietojen näyttämisestä
+    """
+
     def __init__(self, root, store, user, show_home_view, show_department_view):
+        """Luokan konstruktori, joka luo uuden kauppanäkymän.
+
+        Args:
+            root: TKinter-elementti, jonka sisään näkymä luodaan.
+            store: Store-olio, joka on näytettävä kauppa
+            user: User-olio, joka on kirjautuneena sovellukseen.
+            show_home_view: Kutsuttava-arvo, joka vastaa aloitusnäkymään siirtymisestä
+            show_department_view: Kutsuttava-arvo, joka vastaa osastonäkymään siirtymisestä.
+        """
         self._root = root
         self._store = store
         self._user = user
@@ -17,15 +31,23 @@ class StoreView:
         self._initialize()
 
     def pack(self):
+        """Näyttää näkymän
+        """
         self._frame.pack(fill="both", expand=True)
 
     def destroy(self):
+        """Piilottaa näkymän
+        """
         self._frame.destroy()
 
     def _handle_back(self):
+        """Handleri, joka vastaa aloitusnäkymän näyttämisestä, kun back-nappia painetaan.
+        """
         self._show_home_view()
 
     def _initialize(self):
+        """Alustaa kauppanäkymän.
+        """
         self._frame = ttk.Frame(master=self._root, padding=20)
 
         title = ttk.Label(
@@ -66,6 +88,11 @@ class StoreView:
         self._frame.columnconfigure(0, weight=1)
 
     def _can_manage(self):
+        """Tarkistaa onko käyttäjällä manage-käyttöoikeus
+
+        Returns:
+            True, jos käyttäjällä on manage-käyttöoikeus, muutoin False
+        """
         if not self._user.is_employee():
             return True
 
@@ -77,6 +104,8 @@ class StoreView:
         )
 
     def _show_add_department(self):
+        """Näyttää syötkentän, kun painetaan lisää osasto-nappia
+        """
         if self._add_department_frame:
             return
 
@@ -126,11 +155,15 @@ class StoreView:
         name_entry.focus()
 
     def _cancel_add_department(self):
+        """Piilottaa lisää osasto syötekentän.
+        """
         self._add_department_frame.destroy()
         self._add_department_frame = None
         self._status_label.config(text="")
 
     def _handle_save_department(self):
+        """Handleri, joka vastaa osaston tallentamisesta.
+        """
         name = self._department_name_var.get().strip()
 
         try:
@@ -160,6 +193,8 @@ class StoreView:
             self._status_label.config(text=f"Error: {str(e)}")
 
     def _load_departments(self):
+        """Hakee ja näyttää listauksen osastoista näkymässä.
+        """
         for widget in self._departments_frame.winfo_children():
             widget.destroy()
 
@@ -192,4 +227,9 @@ class StoreView:
             )
 
     def _handle_department_click(self, department):
+        """Handleri, joka vastaa osastonäkymään siirtymisestä, kun osaston nimeä klikataan.
+
+        Args:
+            department: Department-olio, joka on näytettävä osasto
+        """
         self._show_department_view(self._store, department)

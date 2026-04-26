@@ -4,7 +4,17 @@ import threading
 
 
 class LoginView():
+    """Näkymä, joka vastaa käyttäjän sisäänkirjaamisesta.
+    """
+
     def __init__(self, root, handle_login, handle_create_merchant_view):
+        """Luokan konstruktori, joka luo uuden sisäänkirjautumisnäkymän.
+
+        Args:
+            root: TKinter-elementti, jonka sisään näkymä alustetaan.
+            handle_login: Handleri, jota kutsutaan, kun käyttäjä kirjautuu sisään.
+            handle_create_merchant_view: Kutsuttava-arvo, jota kutsutaan kun siirrytään kauppiaan rekisteröintinäkymään.
+        """
         self._root = root
         self._frame = None
         self._entry_username = None
@@ -15,12 +25,18 @@ class LoginView():
         self._initialize()
 
     def pack(self):
+        """Näyttää näkymän
+        """
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
+        """Piilottaa näkymän
+        """
         self._frame.destroy()
 
     def _login_handler(self):
+        """Handleri, joka vastaa käyttäjän sisäänkirjaamisesta.
+        """
         username = self._entry_username.get()
         password = self._entry_password.get()
 
@@ -31,6 +47,11 @@ class LoginView():
 
     # generoitu koodi alkaa
     def _do_login(self, username, password):
+        """Tekee sisäänkirjautumisen.
+        Args:
+            username: Merkkijono, joka kuvaa syötekenttään annettua käyttäjätunnusta.
+            password: Merkkijono, joka kuvaa syötekenttään annettua salasanaa.
+        """
         try:
             user_service.login(username, password)
             self._root.after(0, lambda: self._handle_login())
@@ -41,6 +62,8 @@ class LoginView():
     # generoitu koodi päättyy
 
     def _initialize(self):
+        """Alustaa sisäänkirjautmisnäkymän
+        """
         self._frame = ttk.Frame(master=self._root)
         title = ttk.Label(master=self._frame, text="Login")
 

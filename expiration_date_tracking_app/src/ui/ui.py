@@ -11,20 +11,34 @@ from services.user_service import user_service
 
 
 class UI:
+    """Luokka, joka vastaa sovelluksen käyttöliittymässä näytettävästä näkymästä.
+    """
+
     def __init__(self, root):
+        """Luokan konstruktori, joka
+
+        Args:
+            root (_type_): _description_
+        """
         self._root = root
         self._current_view = None
 
     def start(self):
+        """Käynnistää käyttöliittymän
+        """
         self._show_login_view()
 
     def _hide_current_view(self):
+        """Piilottaa nykyisen näkymän.
+        """
         if self._current_view:
             self._current_view.destroy()
 
         self._current_view = None
 
     def _show_login_view(self):
+        """Näyttää kirjautumisnäkymän
+        """
         self._hide_current_view()
 
         self._current_view = LoginView(
@@ -36,6 +50,8 @@ class UI:
         self._current_view.pack()
 
     def _show_home_view(self):
+        """Näyttää aloitusnäkymän
+        """
         self._hide_current_view()
 
         self._current_view = HomeView(
@@ -52,6 +68,8 @@ class UI:
         self._current_view.set_user(user)
 
     def _show_create_merchant_view(self):
+        """Näyttää kauppiaan rekisteröintinäkymän
+        """
         self._hide_current_view()
 
         self._current_view = CreateMerchantView(
@@ -62,6 +80,8 @@ class UI:
         self._current_view.pack()
 
     def _show_employees_view(self):
+        """Näyttää työntekijöiden hallinointi-näkymän
+        """
         self._hide_current_view()
 
         self._current_view = EmployeesView(
@@ -73,6 +93,11 @@ class UI:
         self._current_view.pack()
 
     def _show_employee_view(self, employee):
+        """Näyttää yksittäisen työntekijän hallinnointi-näkymän
+
+        Args:
+            Employee-olio, joka on näytettävä työntekijä.
+        """
         self._hide_current_view()
 
         self._current_view = EmployeeView(
@@ -84,6 +109,8 @@ class UI:
         self._current_view.pack()
 
     def _show_change_password_view(self):
+        """Näyttää salasananvaihtonäkymän
+        """
         self._hide_current_view()
 
         self._current_view = ChangePasswordView(
@@ -94,6 +121,8 @@ class UI:
         self._current_view.pack()
 
     def _after_login_success(self):
+        """Näyttää kertakäyttösalasanalla kirjautumisen jälkeen salasananvaihtonäkymän, muutoin aloitusnäkymän
+        """
         user = user_service.get_current_user()
 
         if user.password_is_temporary:
@@ -102,6 +131,11 @@ class UI:
             self._show_home_view()
 
     def _show_store_view(self, store):
+        """Näyttää kaupan hallinnointi-näkymän
+
+        Args:
+            store: Store-olio, joka on näytettävä kauppa.
+        """
         self._hide_current_view()
 
         user = user_service.get_current_user()
@@ -117,6 +151,12 @@ class UI:
         self._current_view.pack()
 
     def _show_department_view(self, store, department):
+        """Näyttää yksittäisen osaston hallinnointiin liittyvän näkymän
+
+        Args:
+            store: Store-olio, joka kuvaa kaupaa, jonka osasto näytetään.
+            department: Department-olio, joka on näytettävä osasto.
+        """
         self._hide_current_view()
 
         self._current_view = DepartmentView(

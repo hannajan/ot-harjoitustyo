@@ -4,6 +4,9 @@ from services.store_service import store_service
 
 
 class HomeView():
+    """Näkymä, joka vastaa aloitusnäkymän näyttämisestä.
+    """
+
     def __init__(
         self,
         root,
@@ -11,6 +14,14 @@ class HomeView():
         show_login_view,
         show_store_view
     ):
+        """Luokan konstruktori
+
+        Args:
+            root: TKinter-elementti, jonka sisään näkymä luodaan.
+            show_employees_view: Kutsuttava-arvo, joka vastaa työntekijät näkymään siirtymisestä.
+            show_login_view: Kutsuttava-arvo, joka vastaa sisäänkirjautumisnäkymään siirtymisestä.
+            show_store_view: Kutsuttava-arvo, joka vastaa kaupan näkymään siirtymisestä.
+        """
         self._root = root
         self._frame = None
         self._user = None
@@ -23,12 +34,18 @@ class HomeView():
         self._initialize()
 
     def pack(self):
+        """Näyttää näkymän.
+        """
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
+        """Piilottaa näkymän
+        """
         self._frame.destroy()
 
     def _initialize(self):
+        """Alustaa näkymän
+        """
         self._frame = ttk.Frame(master=self._root, padding=20)
 
         self._logout_button = ttk.Button(
@@ -51,6 +68,8 @@ class HomeView():
             row=4, column=2, sticky=constants.E, pady=(5, 0))
 
     def show_manage_buttons(self):
+        """Näyttää hallinnointikäyttöoikeuksien omaaville käyttäjille kaupan lisäysnapin
+        """
         self._add_store_button = ttk.Button(
             master=self._frame, text="Add store", command=self._show_add_store_entry)
         self._add_employee_button = ttk.Button(
@@ -65,6 +84,11 @@ class HomeView():
             row=4, column=1, sticky=constants.W, pady=(5, 0))
 
     def set_user(self, user):
+        """Asettaa käyttäjän näkymään
+
+        Args:
+            user: User-olio, joka sidotaan näkymään.
+        """
         self._user = user
         self._status_label.config(text=f"Logged in as {user.username}")
 
@@ -74,9 +98,13 @@ class HomeView():
         self._populate_stores()
 
     def _handle_employees_click(self):
+        """Handleri, joka vastaa työntekijöiden hallinnointinäkymän näyttämisestä, kun painetaan nappia.
+        """
         self._show_employees_view()
 
     def _populate_stores(self):
+        """Täyttää, käyttäjälle näytettävien kauppojen listan
+        """
         for store in self._stores:
             store.destroy()
         self._stores = []
@@ -117,12 +145,27 @@ class HomeView():
                 self._stores.append(store_title)
 
     def _on_store_hover(self, event):
+        """Hover-elementti, kun kursori viedään tekstin päälle.
+
+        Args:
+            event: Tapahtuma-elementti
+        """
         event.widget.config(font=(None, 12, "bold", "underline"))
 
     def _on_store_leave(self, event):
+        """Hover-elementti, kun kursori viedään pois tekstin päältä.
+
+        Args:
+            event: Tapahtuma-elementti
+        """
         event.widget.config(font=(None, 12, "bold"))
 
     def _handle_save_store(self):
+        """Handleri, joka vastaa kaupan tallentamisesta
+
+        Raises:
+            ValueError, jos kaupan nimeä ei ole annettu.
+        """
         store_name = self._store_name_var.get().strip()
 
         if not store_name:
@@ -141,6 +184,8 @@ class HomeView():
                 0, lambda msg=error_message: self._status_label.config(text=f"Error: {msg}"))
 
     def _show_add_store_entry(self):
+        """Näyttää syötekentän, kun klikataan lisää kauppa-nappia.
+        """
         if self._add_store_shown:
             return
         self._add_store_shown = True
@@ -175,5 +220,7 @@ class HomeView():
         self._store_name_entry.focus()
 
     def _handle_logout(self):
+        """Handleri, joka vastaa käyttäjän uloskirjaamisesta.
+        """
         user_service.logout()
         self._show_login_view()

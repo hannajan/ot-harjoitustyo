@@ -3,7 +3,16 @@ from services.user_service import user_service
 
 
 class CreateMerchantView:
+    """Näkymä, joka vastaa kauppiaan rekisteröinnistä.
+    """
+
     def __init__(self, root, handle_show_login_view):
+        """Luokan konstruktori, joka luo kauppiaan rekisteröintinäkymän.
+
+        Args:
+            root: TKinter-elemnetti, jonka sisään näkymä luodaan.
+            handle_show_login_view: Kutsuttava-arvo, joka vastaa sisäänkirjautumsinäkymän näyttämisestä
+        """
         self._root = root
         self._frame = None
         self._entry_username = None
@@ -13,12 +22,18 @@ class CreateMerchantView:
         self._initialize()
 
     def pack(self):
+        """Näyttää näkymän
+        """
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
+        """Piilottaa näkymän
+        """
         self._frame.destroy()
 
     def _registeration_handler(self):
+        """Handleri, joka vastaa kauppiaan rekisteröinnistä
+        """
         username = self._entry_username.get()
         password = self._entry_password.get()
         password_confirm = self._entry_password_confirm.get()
@@ -29,6 +44,16 @@ class CreateMerchantView:
             self._error_message.config(text=f"Error: {error}")
 
     def _do_registeration(self, username, password, password_confirm):
+        """Rekisteröi kauppiaan
+
+        Args:
+            username: Merkkijono, joka on käyttäjätunnus kenttään annettu syöte
+            password: Merkkijono, joka on salasana kenttään annettu syöte
+            password_confirm: Merkkijono, jonka tulee vastata salasana-kentän syötettä
+
+        Raises:
+            ValueError, jos sama salasana ei ole annettu kaksi kertaa.
+        """
         if password != password_confirm:
             raise ValueError("Passwords do not match")
 
@@ -40,9 +65,13 @@ class CreateMerchantView:
             self._error_message.config(text=f"Error: {error}")
 
     def _handle_back(self):
+        """Handleri, joka vastaa sisäänkirjautumisnäkymän näyttämisestä, kun painaa back-nappia
+        """
         self._handle_show_login_view()
 
     def _initialize(self):
+        """Alustaa näkymän
+        """
         self._frame = ttk.Frame(master=self._root)
         title = ttk.Label(master=self._frame,
                           text="Register as merchant", font=(None, 24, "bold"))

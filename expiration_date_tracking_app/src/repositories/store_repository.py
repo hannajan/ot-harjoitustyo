@@ -15,10 +15,26 @@ def get_store_by_row(row):
 
 
 class StoreRepository:
+    """Luokka, joka vastaa Store-olioihin liittyvistä tietokantaoperaatioista.
+    """
+
     def __init__(self, connection):
+        """Luokan konstruktori.
+
+        Args:
+            connection: Connection-olio, joka on tietokantayhteys.
+        """
         self._connection = connection
 
     def create(self, store):
+        """Tallentaa kaupan tietokantaan.
+
+        Args:
+            store: Store-olio, joka on tietokantaan tallennettava kauppa.
+
+        Returns:
+            Tietokantaan tallennettu Store-olio.
+        """
         cursor = self._connection.cursor()
 
         cursor.execute(
@@ -31,6 +47,14 @@ class StoreRepository:
         return store
 
     def find_by_id(self, store_id):
+        """Palauttaa id:n perusteella löydetyn kaupan.
+
+        Args:
+            store_id: Merkkijono, joka on palautettavan kaupan id.
+
+        Returns:
+            Store-olio, joka on löydetty id:n perusteella.
+        """
         cursor = self._connection.cursor()
 
         cursor.execute(
@@ -43,6 +67,14 @@ class StoreRepository:
         return get_store_by_row(row)
 
     def find_all_by_owner_id(self, owner_id):
+        """Palauttaa kaikki kauppiaan omistamat kaupat.
+
+        Args:
+            owner_id: Merkkijono, joka on sen kauppiaan id, jonka kaupat palautetaan.
+
+        Returns:
+            Lista Store-olioita.
+        """
         cursor = self._connection.cursor()
 
         cursor.execute(
@@ -55,6 +87,8 @@ class StoreRepository:
         return [get_store_by_row(row) for row in rows]
 
     def delete_all(self):
+        """Poistaa kaikki kaupat tietokannasta.
+        """
         cursor = self._connection.cursor()
 
         cursor.execute("PRAGMA foreign_keys = ON;")
@@ -63,6 +97,11 @@ class StoreRepository:
         self._connection.commit()
 
     def get_all(self):
+        """Palauttaa kaikki kaupat.
+
+        Returns:
+            Lista Store-olioita.
+        """
         cursor = self._connection.cursor()
 
         cursor.execute(

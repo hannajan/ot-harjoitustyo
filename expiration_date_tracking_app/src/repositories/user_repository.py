@@ -27,10 +27,28 @@ def get_user_by_row(row):
 
 
 class UserRepository:
+    """Luokka, joka vastaa käyttäjään liittyvistä tietokantaoperaatioista.
+    """
+
     def __init__(self, connection):
+        """Luokan konstruktori.
+
+        Args:
+            connection: Connection-olio, joka on tietokantayhteys.
+        """
+
         self._connection = connection
 
     def create(self, user):
+        """Tallentaa käyttäjän tietokantaan.
+
+        Args:
+            user: User-olio, joka kuvaa tallennettavaa käyttäjää.
+
+        Returns:
+            Tallennettu käyttäjä-olio.
+        """
+
         cursor = self._connection.cursor()
 
         password_is_temporary = int(user.password_is_temporary) if hasattr(
@@ -56,6 +74,8 @@ class UserRepository:
         return user
 
     def delete_all(self):
+        """Poistaa kaikki käyttäjät tietokannasta.
+        """
         cursor = self._connection.cursor()
 
         cursor.execute("PRAGMA foreign_keys = ON;")
@@ -64,6 +84,11 @@ class UserRepository:
         self._connection.commit()
 
     def get_all(self):
+        """Palauttaa kaikki käyttäjät.
+
+        Returns:
+            Lista käyttäjä-olioista.
+        """
         cursor = self._connection.cursor()
         cursor.execute("SELECT * FROM users")
 
@@ -72,6 +97,14 @@ class UserRepository:
         return list(map(get_user_by_row, rows))
 
     def find_by_username(self, username):
+        """Palauttaa käyttäjänimen perusteella löydetyn käyttäjän.
+
+        Args:
+            username: Käyttäjätunnus, jota vastaava käyttäjä palautetaan.
+
+        Returns:
+            Palauttaa User-olion, jos käyttäjä on olemassa, muussa tapauksessa None.
+        """
         cursor = self._connection.cursor()
         cursor.execute(
             "SELECT * FROM users WHERE username = ?",
@@ -83,6 +116,14 @@ class UserRepository:
         return get_user_by_row(row)
 
     def get_user_by_id(self, user_id):
+        """Palauttaa id:n perusteella löydetyn käyttäjän.
+
+        Args:
+            user_id: Merkkijono, joka on sen käyttäjän id, joka palautetaan.
+
+        Returns:
+            User-olion, jos on olemassa, muussa tapauksessa None.
+        """
         cursor = self._connection.cursor()
         cursor.execute(
             "SELECT * FROM users WHERE user_id = ?",
@@ -94,6 +135,13 @@ class UserRepository:
         return get_user_by_row(row)
 
     def update_password(self, user_id, new_password, password_is_temporary):
+        """Päivittää käyttäjän salasanan.
+
+        Args:
+            user_id: Merkkijono, joka on käyttäjän id, jonka salasana päivitetään.
+            new_password: Merkkijono, joka on uusi päivitettävä salasana.
+            password_is_temporary: Boolean arvo, joka kuvaa sitä onko kertakäyttösalasana vaihdettu.
+        """
         cursor = self._connection.cursor()
 
         cursor.execute(
@@ -106,6 +154,14 @@ class UserRepository:
         self._connection.commit()
 
     def find_all_by_employer_id(self, employer_id):
+        """Palauttaa kaikki kauppiaan id:n perusteella löydetyt työntekijät.
+
+        Args:
+            employer_id: Kauppiaan id, jonka työntekijät palautetaan.
+
+        Returns:
+            Lista Työntekijä-olioita, jotka ovat kauppiaalla töissä.
+        """
         cursor = self._connection.cursor()
         cursor.execute(
             "SELECT * FROM users WHERE employer_id = ?",

@@ -3,7 +3,16 @@ from services.user_service import user_service
 
 
 class ChangePasswordView():
+    """Näkymä, joka vastaa kertakirjautumissalasanan vaihdosta
+    """
+
     def __init__(self, root, show_home_view):
+        """Luokan konstruktori
+
+        Args:
+            root: TKinter-elementti, jonka sisään näkymä luodaan.
+            show_home_view: Kutsuttava-elementti, joka vastaa aloitusnäkymään siirtymisestä.
+        """
         self._root = root
         self._show_home_view = show_home_view
         self._entry_password = None
@@ -11,13 +20,19 @@ class ChangePasswordView():
         self._initialize()
 
     def pack(self):
+        """Näyttää näkymän.
+        """
         self._frame.pack(fill=constants.X)
         self._frame.update_idletasks()
 
     def destroy(self):
+        """Piilottaa näkymän.
+        """
         self._frame.destroy()
 
     def _initialize(self):
+        """Alustaa näkymän.
+        """
         self._frame = ttk.Frame(master=self._root)
         user = user_service.get_current_user()
 
@@ -86,6 +101,8 @@ class ChangePasswordView():
         new_password_entry.focus()
 
     def _handle_change_password(self):
+        """Handleri, joka vastaa salasanan vaihdosta.
+        """
         password = self._entry_password.get().strip()
         password_confirm = self._entry_password_confirm.get().strip()
 
@@ -95,6 +112,15 @@ class ChangePasswordView():
             self._error_message.config(text=f"Error: {error}")
 
     def _do_password_change(self, password, password_confirm):
+        """Vaihtaa salasanan
+
+        Args:
+            password: Merkkijono, joka on salasanan syötekenttään annettu arvo.
+            password_confirm: Merkkijono, joka on annettu salasanan vahvistuskenttään.
+
+        Raises:
+            ValueError, jos salasana ja salasanan vahvistus eivät täsmää.
+        """
         if password != password_confirm:
             raise ValueError("Passwords don't match")
 

@@ -2,6 +2,8 @@ from tkinter import ttk, StringVar
 from services.user_service import user_service
 from services.shelf_service import shelf_service
 
+# Luokka generoitu tekoälyllä
+
 
 class DepartmentView:
     def __init__(self, root, department, user, store, show_store_view):
@@ -44,29 +46,33 @@ class DepartmentView:
         self._status_label = ttk.Label(self._frame, text="")
 
         shelves_title = ttk.Label(
-          self._frame,
-          text="Shelves:",
-          font=(None, 14, "bold")
-      )
+            self._frame,
+            text="Shelves:",
+            font=(None, 14, "bold")
+        )
 
         self._shelves_frame = ttk.Frame(self._frame)
 
         title.grid(row=0, column=0, sticky="W")
         back_button.grid(row=0, column=1, sticky="E")
-        self._status_label.grid(row=1, column=0, columnspan=2, sticky="W", pady=5)
-        shelves_title.grid(row=2, column=0, columnspan=2, sticky="W", pady=(10, 0))
-        self._shelves_frame.grid(row=3, column=0, columnspan=2, sticky="W", pady=5)
-        self._shelves_frame.grid(row=3, column=0, columnspan=2, sticky="W", pady=10)
+        self._status_label.grid(
+            row=1, column=0, columnspan=2, sticky="W", pady=5)
+        shelves_title.grid(row=2, column=0, columnspan=2,
+                           sticky="W", pady=(10, 0))
+        self._shelves_frame.grid(
+            row=3, column=0, columnspan=2, sticky="W", pady=5)
+        self._shelves_frame.grid(
+            row=3, column=0, columnspan=2, sticky="W", pady=10)
 
         self._load_shelves()
 
         if self._can_manage():
-          self._add_shelf_button = ttk.Button(
-              self._frame,
-              text="Add shelf",
-              command=self._show_add_shelf
-          )
-          self._add_shelf_button.grid(row=4, column=0, sticky="W", pady=10)
+            self._add_shelf_button = ttk.Button(
+                self._frame,
+                text="Add shelf",
+                command=self._show_add_shelf
+            )
+            self._add_shelf_button.grid(row=4, column=0, sticky="W", pady=10)
 
     def _can_manage(self):
         if not self._user.is_employee():
@@ -101,7 +107,8 @@ class DepartmentView:
         for i, shelf in enumerate(shelves):
             label = ttk.Label(
                 self._shelves_frame,
-                text=f"{shelf.name}" + (" (default)" if shelf.is_default else ""),
+                text=f"{shelf.name}" +
+                (" (default)" if shelf.is_default else ""),
                 font=(None, 12, "bold"),
                 cursor="arrow"
             )
@@ -114,18 +121,19 @@ class DepartmentView:
             )
 
     def _handle_shelf_click(self, shelf):
-      if not self._can_manage():
-          self._status_label.config(text="No permission to edit shelf")
-          return
+        if not self._can_manage():
+            self._status_label.config(text="No permission to edit shelf")
+            return
 
-      self._show_rename_shelf(shelf)
+        self._show_rename_shelf(shelf)
 
     def _show_add_shelf(self):
         if self._add_shelf_frame:
             return
 
         self._add_shelf_frame = ttk.Frame(self._frame)
-        self._add_shelf_frame.grid(row=4, column=0, columnspan=2, pady=10, sticky="W")
+        self._add_shelf_frame.grid(
+            row=4, column=0, columnspan=2, pady=10, sticky="W")
 
         ttk.Label(
             self._add_shelf_frame,
@@ -183,50 +191,51 @@ class DepartmentView:
             self._status_label.config(text=f"Error: {str(e)}")
 
     def _show_rename_shelf(self, shelf):
-      if self._rename_frame is not None:
-        return
+        if self._rename_frame is not None:
+            return
 
-      self._rename_frame = ttk.Frame(self._frame)
-      self._rename_frame.grid(row=5, column=0, columnspan=2, sticky="W", pady=10)
+        self._rename_frame = ttk.Frame(self._frame)
+        self._rename_frame.grid(
+            row=5, column=0, columnspan=2, sticky="W", pady=10)
 
-      label = ttk.Label(
-          self._rename_frame,
-          text="New name"
-      )
-      label.grid(row=0, column=0, sticky="W")
+        label = ttk.Label(
+            self._rename_frame,
+            text="New name"
+        )
+        label.grid(row=0, column=0, sticky="W")
 
-      self._rename_var = StringVar(value=shelf.name)
+        self._rename_var = StringVar(value=shelf.name)
 
-      entry = ttk.Entry(
-          self._rename_frame,
-          textvariable=self._rename_var,
-          width=30
-      )
-      entry.grid(row=0, column=1, padx=5)
+        entry = ttk.Entry(
+            self._rename_frame,
+            textvariable=self._rename_var,
+            width=30
+        )
+        entry.grid(row=0, column=1, padx=5)
 
-      def save():
-          try:
-              shelf_service.rename_shelf(
-                  shelf,
-                  self._rename_var.get().strip()
-              )
-              self._rename_frame.destroy()
-              self._rename_frame = None
-              self._refresh_shelves()
-          except Exception as e:
-              self._status_label.config(text=str(e))
+        def save():
+            try:
+                shelf_service.rename_shelf(
+                    shelf,
+                    self._rename_var.get().strip()
+                )
+                self._rename_frame.destroy()
+                self._rename_frame = None
+                self._refresh_shelves()
+            except Exception as e:
+                self._status_label.config(text=str(e))
 
-      ttk.Button(
-          self._rename_frame,
-          text="Save",
-          command=save
-      ).grid(row=1, column=0, pady=5, sticky="W")
+        ttk.Button(
+            self._rename_frame,
+            text="Save",
+            command=save
+        ).grid(row=1, column=0, pady=5, sticky="W")
 
-      entry.focus()
+        entry.focus()
 
     def _refresh_shelves(self):
-      if hasattr(self, "_rename_frame") and self._rename_frame:
-          self._rename_frame.destroy()
-          self._rename_frame = None
+        if hasattr(self, "_rename_frame") and self._rename_frame:
+            self._rename_frame.destroy()
+            self._rename_frame = None
 
-      self._load_shelves()
+        self._load_shelves()

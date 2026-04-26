@@ -14,10 +14,24 @@ def get_department_by_row(row):
 
 
 class DepartmentRepository:
+    """Luokka, joka vastaa osastoihin liittyvistä tietokantaoperaatioista.
+    """
+
     def __init__(self, connection):
+        """Luokan konstruktori.
+
+        Args:
+            connection: Connection-olio, joka on tietokantayhteys.
+        """
         self._connection = connection
 
     def create(self, department: Department):
+        """Tallentaa osaston tietokantaan.
+
+        Args:
+            department: Osasto, joka tallennetaan tietokantaan.
+        """
+
         cursor = self._connection.cursor()
         cursor.execute(
             "INSERT INTO departments (department_id, store_id, name, check_days_before) "
@@ -29,6 +43,15 @@ class DepartmentRepository:
         self._connection.commit()
 
     def get_by_store(self, store_id):
+        """Palauttaa kaupan osastot.
+
+        Args:
+            store_id: Merkkijono, joka on sen kaupan id, jonka osastot palautetaan.
+
+        Returns:
+            Lista Department-olioita.
+        """
+
         cursor = self._connection.cursor()
         cursor.execute(
             "SELECT department_id, store_id, name, check_days_before "
