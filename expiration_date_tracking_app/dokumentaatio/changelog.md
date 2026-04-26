@@ -22,3 +22,9 @@
 - Tehty tietokantaan oma taulu työntekijän kauppakohtaisista oikeuksista
 - Tehty PermissionRepository, joka vastaa oikeuksiin liittyvistä tietokantahauista ja tallennuksista
 - Otettu oikeudet käyttöön ja työntekijän kotinäkymä listaa ne kaupat, joihin on oikeus
+
+## Viikko 6
+- Tehty tietokantaan taulut departments ja shevles
+- Tehty repositoriot ja servicet osatoille ja hyllyille
+- Tehty käyttöliittymään mahdollisuus lisätä osastoja ja näkymä osastolle, jossa voi lisätä hyllyjä
+- Tehty mahdollisuus muokata hyllyjen nimiä
