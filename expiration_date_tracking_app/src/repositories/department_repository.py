@@ -61,6 +61,16 @@ class DepartmentRepository:
 
         rows = cursor.fetchall()
         return [get_department_by_row(row) for row in rows]
+    
+    def delete_all(self):
+        """Poistaa kaikki osastot tietokannasta.
+        """
+        cursor = self._connection.cursor()
+
+        cursor.execute("PRAGMA foreign_keys = ON;")
+
+        cursor.execute("DELETE FROM departments")
+        self._connection.commit()
 
 
 department_repository = DepartmentRepository(get_database_connection())
