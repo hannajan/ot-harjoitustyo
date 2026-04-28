@@ -7,7 +7,7 @@
 [Työaikakirjanpito](https://github.com/hannajan/ot-harjoitustyo/blob/master/expiration_date_tracking_app/dokumentaatio/tyoaikakirjanpito.md)  
 [Changelog](https://github.com/hannajan/ot-harjoitustyo/blob/master/expiration_date_tracking_app/dokumentaatio/changelog.md)  
 [Arkkitehtuuri](https://github.com/hannajan/ot-harjoitustyo/blob/master/expiration_date_tracking_app/dokumentaatio/arkkitehtuuri.md)  
-[Release](https://github.com/hannajan/ot-harjoitustyo/releases/tag/viikko5)  
+[Releases](https://github.com/hannajan/ot-harjoitustyo/releases)  
 [Käyttöohje](https://github.com/hannajan/ot-harjoitustyo/blob/master/expiration_date_tracking_app/dokumentaatio/kayttoohje.md)  
 
 
