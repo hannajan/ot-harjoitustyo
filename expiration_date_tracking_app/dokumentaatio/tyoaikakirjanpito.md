@@ -19,5 +19,5 @@
 | 21.4. | 3 | Kaupan käyttöoikeuksien tallennus tietokantaan ja työntekjän HomeView listaa kaupat, joihin oikeus, refaktoroitu koodia, debuggailua, dokumentaation päivitystä ja sekvenssikaavio, github release |
 | 25.4. | 2 | Osastojen lisäys: tietokantataulu, repositorio, service ja ui-näkymä |
 | 26.4. | 5 | Hyllyjen lisäys: tietokantataulu, repositoria, service ja ui-näkymä. Debuggailua. DocString ja arkkitehtuuridokumentaation päivitystä ja kirjoittamista |
-| 28.4. | 1 | Käyttöohjeen kirjoittaminen |
-| yht. | 45 | 
+| 28.4. | 1.5 | Käyttöohjeen kirjoittaminen, Osaston testien kirjoittamista ja testien korjailua |
+| yht. | 46.5 | 

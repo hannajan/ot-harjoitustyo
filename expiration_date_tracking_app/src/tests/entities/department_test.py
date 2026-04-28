@@ -1,10 +1,12 @@
 import unittest
 from entities.department import Department
 
+
 class TestDepartment(unittest.TestCase):
 
     def test_created_departmnet_has_correct_attributes(self):
-        department = Department("store_id123", "Test Department", 7, "dep_id_123")
+        department = Department(
+            "store_id123", "Test Department", 7, "dep_id_123")
 
         self.assertEqual(department.name, "Test Department")
         self.assertEqual(department.check_days_before, 7)

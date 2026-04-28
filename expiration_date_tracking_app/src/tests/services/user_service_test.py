@@ -106,7 +106,7 @@ class TestUserService(unittest.TestCase):
         with self.assertRaises(ValueError) as context:
             user = self.user_service.login("Nonexisting", "secret123")
 
-        self.assertEqual(str(context.exception), "User not found")
+        self.assertEqual(str(context.exception), "Wrong username or password")
 
     def test_login_with_wrong_password_fails(self):
         self.user_service.register_merchant("Merchant", "Password")

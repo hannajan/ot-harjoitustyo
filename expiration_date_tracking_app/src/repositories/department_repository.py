@@ -61,7 +61,7 @@ class DepartmentRepository:
 
         rows = cursor.fetchall()
         return [get_department_by_row(row) for row in rows]
-    
+
     def delete_all(self):
         """Poistaa kaikki osastot tietokannasta.
         """
