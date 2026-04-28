@@ -24,7 +24,7 @@
 - Otettu oikeudet käyttöön ja työntekijän kotinäkymä listaa ne kaupat, joihin on oikeus
 
 ## Viikko 6
-- Tehty tietokantaan taulut departments ja shevles
+- Tehty tietokantaan taulut departments ja shelves
 - Tehty repositoriot ja servicet osatoille ja hyllyille
 - Tehty käyttöliittymään mahdollisuus lisätä osastoja ja näkymä osastolle, jossa voi lisätä hyllyjä
 - Tehty mahdollisuus muokata hyllyjen nimiä
