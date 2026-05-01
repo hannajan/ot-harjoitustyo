@@ -7,6 +7,10 @@ def drop_tables(connection):
     cursor.execute("PRAGMA foreign_keys = ON;")
 
     cursor.execute('''
+        DROP TABLE IF EXISTS tracked_products; 
+    ''')
+
+    cursor.execute('''
       DROP TABLE IF EXISTS shelves;
     ''')
 
@@ -106,6 +110,25 @@ def create_tables(connection):
         is_default INTEGER NOT NULL DEFAULT 0,
         FOREIGN KEY (department_id) REFERENCES departments(department_id)
         );
+    ''')
+
+    connection.commit()
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS products (
+        ean_code TEXT PRIMARY KEY,
+        name TEXT NOT NULL
+    );
+    ''')
+
+    cursor.execute('''
+        CREATE TABLE tracked_products (
+        id TEXT PRIMARY KEY,
+        ean_code TEXT NOT NULL,
+        expiration_date TEXT NOT NULL,
+        shelf_id TEXT NOT NULL,
+        check_days_before INTEGER
+    );
     ''')
 
     connection.commit()
