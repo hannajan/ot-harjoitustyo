@@ -39,7 +39,7 @@ class DepartmentService:
 
     def get_departments_by_store(self, store_id):
         return self._department_repository.get_by_store(store_id)
-    
+
     def update_department(self, department):
         """Päivittää osaston tiedot.
 

@@ -2,6 +2,7 @@ from database_connection import get_database_connection
 
 from entities.product import Product
 
+
 def get_product_by_row(row):
     if row:
         return Product(
@@ -9,6 +10,7 @@ def get_product_by_row(row):
             name=row["name"]
         )
     return None
+
 
 class ProductRepository:
     """Luokka, joka vastaa Product-olioihin liittyvistä tietokantaoperaatioista.
@@ -56,7 +58,6 @@ class ProductRepository:
 
         cursor.execute("DELETE FROM products")
         self._connection.commit()
-
 
     def get_by_ean_code(self, ean_code):
         """Hakee tuotteen EAN-koodin perusteella.

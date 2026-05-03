@@ -14,7 +14,9 @@ def get_tracked_product_by_row(row):
         )
     return None
 
-#tämä metodi on generoitu tekoälyllä
+# tämä metodi on generoitu tekoälyllä
+
+
 def map_row_to_tracked_product(row):
     if not row:
         return None
@@ -26,6 +28,7 @@ def map_row_to_tracked_product(row):
         shelf_id=row[3],
         check_days_before=row[4]
     )
+
 
 class TrackedProductRepository:
     """Luokka, joka vastaa TrackedProduct-olioihin liittyvistä tietokantaoperaatioista.
@@ -90,7 +93,6 @@ class TrackedProductRepository:
         )
 
         self._connection.commit()
-        
 
     def get_by_shelf_id(self, shelf_id):
         """Palauttaa listan seurannassa olevista tuotteista hyllyn id:n perusteella
@@ -113,32 +115,8 @@ class TrackedProductRepository:
         rows = cursor.fetchall()
 
         return [get_tracked_product_by_row(row) for row in rows]
-    
-    #tämä metodi on generoitu tekoälyllä
-    def get_by_department(self, department_id):
-        cursor = self._connection.cursor()
 
-        cursor.execute(
-            "SELECT "
-            "tracked_products.tracked_product_id, "
-            "tracked_products.ean_code, "
-            "tracked_products.expiration_date, "
-            "tracked_products.shelf_id, "
-            "tracked_products.check_days_before, "
-            "shelves.department_id, "
-            "shelves.name, "
-            "shelves.is_default "
-            "FROM tracked_products "
-            "JOIN shelves ON tracked_products.shelf_id = shelves.shelf_id "
-            "WHERE shelves.department_id = ?",
-            (department_id,)
-        )
-
-        rows = cursor.fetchall()
-
-        return [map_row_to_tracked_product_with_shelf(row) for row in rows]
-    
-    #tämä metodi on generoitu tekoälyllä
+    # tämä metodi on generoitu tekoälyllä
     def get_by_shelf(self, shelf_id):
         cursor = self._connection.cursor()
 
@@ -157,7 +135,7 @@ class TrackedProductRepository:
         rows = cursor.fetchall()
 
         return [get_tracked_product_by_row(row) for row in rows]
-    
+
     def update_expiration_date(self, tracked_product_id, expiration_date):
         """Päivittää seurannassa olevan tuotteen päiväyksen.
 
@@ -178,6 +156,7 @@ class TrackedProductRepository:
         )
 
         self._connection.commit()
+
 
 tracked_product_repository = TrackedProductRepository(
     get_database_connection())

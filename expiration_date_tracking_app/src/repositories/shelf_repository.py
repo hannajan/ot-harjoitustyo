@@ -13,7 +13,6 @@ def get_shelf_by_row(row):
     return None
 
 
-
 class ShelfRepository:
     """Luokka, joka vastaa hyllyihin liittyvistä tietokantaoperaatioista
     """

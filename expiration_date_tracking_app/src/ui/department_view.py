@@ -91,7 +91,7 @@ class DepartmentView:
                 text="Add shelf",
                 command=self._show_add_shelf
             )
-           
+
             self._edit_days_button = ttk.Button(
                 self._frame,
                 text="Edit",
@@ -150,15 +150,17 @@ class DepartmentView:
                     command=lambda s=shelf: self._show_rename_shelf(s)
                 ).grid(row=0, column=1, padx=8, sticky="W")
 
-            products = product_service.get_products_to_check_by_shelf(shelf.shelf_id)
-            
+            products = product_service.get_products_to_check_by_shelf(
+                shelf.shelf_id)
+
             for j, product in enumerate(products):
                 product_info = product_service.find_product_by_ean(
                     product.ean_code
                 )
 
                 row_frame = ttk.Frame(shelf_frame)
-                row_frame.grid(row=j + 1, column=0, columnspan=2, sticky="EW", padx=(20, 0))
+                row_frame.grid(row=j + 1, column=0, columnspan=2,
+                               sticky="EW", padx=(20, 0))
 
                 name_label = ttk.Label(
                     row_frame,
@@ -188,7 +190,8 @@ class DepartmentView:
                 set_date_button = ttk.Button(
                     row_frame,
                     text="Set date",
-                    command=lambda row_frame=row_frame, product=product: self._show_set_date_form(row_frame, product)
+                    command=lambda row_frame=row_frame, product=product: self._show_set_date_form(
+                        row_frame, product)
                 )
 
                 row_frame.grid_columnconfigure(0, weight=1)
@@ -315,9 +318,9 @@ class DepartmentView:
 
         self._load_shelves()
 
-    
-    #generoitu koodi alkaa
-    #muokattu toimivaksi
+    # generoitu koodi alkaa
+    # muokattu toimivaksi
+
     def _show_edit_days(self):
         self._edit_days_button.grid_remove()
 
@@ -361,7 +364,6 @@ class DepartmentView:
             command=save
         )
         self._save_days_button.grid(row=2, column=3, sticky="E")
-    
 
     def _show_set_date_form(self, row_frame, product):
         for widget in row_frame.grid_slaves(row=1, column=1):
@@ -395,4 +397,4 @@ class DepartmentView:
 
         entry.grid(row=1, column=1, sticky="E")
         save_button.grid(row=1, column=2, sticky="E", padx=(5, 0))
-    #generoitu koodi päättyy
+    # generoitu koodi päättyy

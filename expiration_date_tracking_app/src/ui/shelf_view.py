@@ -4,6 +4,7 @@ from tkinter import ttk, constants, StringVar
 from services.user_service import user_service
 from services.product_service import product_service
 
+
 class ShelfView:
     def __init__(self, root, shelf, department, store, show_department_view):
         self._root = root
@@ -67,7 +68,8 @@ class ShelfView:
         back_button.grid(row=0, column=2, sticky="E")
         self._status_label.grid(row=1, column=0, sticky="W", pady=5)
         products_title.grid(row=2, column=0, sticky="W", pady=10)
-        self._products_frame.grid(row=3, column=0, columnspan=2, sticky="W", pady=5)
+        self._products_frame.grid(
+            row=3, column=0, columnspan=2, sticky="W", pady=5)
         self._add_product_frame.grid(row=5, column=0, sticky="W")
 
         self._products_frame.grid_columnconfigure(0, weight=1)
@@ -79,17 +81,16 @@ class ShelfView:
                 command=self._show_add_product
             )
             self._add_product_button.grid(row=4, column=0, sticky="W", pady=10)
-        
 
         self._load_products()
 
-        
     def _load_products(self):
         for widget in self._products_frame.winfo_children():
-            widget.destroy() 
+            widget.destroy()
 
         try:
-            products = product_service.get_tracked_products_for_shelf(self._shelf.shelf_id)
+            products = product_service.get_tracked_products_for_shelf(
+                self._shelf.shelf_id)
         except ValueError as error:
             self._status_var.set(str(error))
 
@@ -99,10 +100,11 @@ class ShelfView:
                 text="No products"
             ).grid(row=0, column=0, sticky="W")
             return
-        
+
         for i, product in enumerate(products):
             row_frame = ttk.Frame(self._products_frame)
-            product_info = product_service.find_product_by_ean(product.ean_code)
+            product_info = product_service.find_product_by_ean(
+                product.ean_code)
 
             name_label = ttk.Label(
                 row_frame,
@@ -111,7 +113,8 @@ class ShelfView:
             )
 
             try:
-                formatted_date = datetime.fromisoformat(product.expiration_date).strftime("%d-%m-%Y")
+                formatted_date = datetime.fromisoformat(
+                    product.expiration_date).strftime("%d-%m-%Y")
             except ValueError:
                 formatted_date = product.expiration_date
 
@@ -130,14 +133,16 @@ class ShelfView:
             set_date_button = ttk.Button(
                 row_frame,
                 text="Set date",
-                command=lambda row_frame=row_frame, product=product: self._show_set_date_form(row_frame, product)
+                command=lambda row_frame=row_frame, product=product: self._show_set_date_form(
+                    row_frame, product)
             )
 
             if self._can_add_products():
                 delete_button = ttk.Button(
                     row_frame,
                     text="Delete",
-                    command=lambda product=product: self._handle_delete_product(product)
+                    command=lambda product=product: self._handle_delete_product(
+                        product)
                 )
 
                 delete_button.grid(row=1, column=2, sticky="E", padx=(5, 0))
@@ -151,7 +156,7 @@ class ShelfView:
             set_date_button.grid(row=1, column=1, sticky="E")
 
             row_frame.grid(row=i, column=0, sticky="EW", pady=4)
-        
+
     def _can_add_products(self):
         if not self._user.is_employee():
             return True
@@ -184,8 +189,6 @@ class ShelfView:
             text="Add to tracking",
             command=self._handle_add_to_tracking
         )
-        
-
 
         ean_label.grid(row=0, column=0, sticky="W")
         ean_entry.grid(row=0, column=1, sticky="W")
@@ -342,8 +345,6 @@ class ShelfView:
 
         new_date_entry.grid(row=1, column=1, sticky="E")
         save_button.grid(row=1, column=2, sticky="E", padx=(5, 0))
-
-
 
     def _handle_set_date(self, product):
         expiration_date = self._expiration_var.get().strip()
