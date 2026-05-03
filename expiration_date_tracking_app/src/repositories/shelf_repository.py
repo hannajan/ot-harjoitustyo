@@ -13,6 +13,7 @@ def get_shelf_by_row(row):
     return None
 
 
+
 class ShelfRepository:
     """Luokka, joka vastaa hyllyihin liittyvistä tietokantaoperaatioista
     """
@@ -93,6 +94,24 @@ class ShelfRepository:
             ))
 
         self._connection.commit()
+
+    def get_by_id(self, shelf_id):
+        cursor = self._connection.cursor()
+
+        cursor.execute(
+            "SELECT "
+            "shelf_id, "
+            "department_id, "
+            "name, "
+            "is_default "
+            "FROM shelves "
+            "WHERE shelf_id = ?",
+            (shelf_id,)
+        )
+
+        row = cursor.fetchone()
+
+        return get_shelf_by_row(row)
 
 
 shelf_repository = ShelfRepository(get_database_connection())

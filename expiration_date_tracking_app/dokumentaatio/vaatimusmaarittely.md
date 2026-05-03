@@ -1,4 +1,4 @@
-# Alustava vaatimusmäärittely
+# Vaatimusmäärittely
 
 ## Sovelluksen tarkoitus
 **Päiväyshallintasovellus**, jolla voi seurata kaupassa myynnissä olevien tuotteiden _parasta ennen -päiväyksiä_. 
@@ -37,19 +37,19 @@ Myöhemmin sovellukseen saatetaan vielä lisätä _pääkäyttäjä_, jolla on k
   - [x] voi lisätä _hyllyn_ osastoon
   - [x] voi lisätä _tarkistussäännön_ osastoon, jonka perusteella tuotteita voi tarkastella (esim. 3 päivää ennen)
   - [x] voi muokata osaston tietoja (nimeä, hyllyjä...)
-- [ ] voi lisätä _tuotteen_ hyllyyn
-  - [ ] tuotteen yksilöivä id on tuotteen _EAN-koodi_
-  - [ ] tuotteelle annetaan _nimi_
-  - [ ] tuotteelle annetaan _parasta ennen -päiväys_
-  - [ ] tuotteelle voi määritellä hyllyrivin
-  - [ ] tuotteelle voi määritellä osaston säännöstä poikkeavan _tarkistussäännön_
-- [ ] voi muokata _tuotteen_ tietoja: nimeä, ean-koodia, parasta ennen -päiväystä, hyllyriviä...
-- [ ] näkee tarkistussäännön mukaisen listauksen tuotteista, joiden parasta ennen päiväys on tulossa tai mennyt jo
-  - [ ] listaus näkyy osastoittain ja hyllyittäin (ja hyllyriveittäin, jos määritelty)
-  - [ ] voi listauksesta merkitä tuotteelle uuden parasta ennen -päiväyksen
-  - [ ] voi ohittaa tuotteen yhden päivän ajaksi
+- [x] voi lisätä _tuotteen_ hyllyyn
+  - [x] tuotteen yksilöivä id on tuotteen _EAN-koodi_
+  - [x] tuotteelle annetaan _nimi_
+  - [x] tuotteelle annetaan _parasta ennen -päiväys_
+- [x] voi muokata _tuotteen_ parasta ennen -päiväystä, hyllyriviä...
+- [x] näkee tarkistussäännön mukaisen listauksen tuotteista, joiden parasta ennen päiväys on tulossa tai mennyt jo
+  - [x] listaus näkyy osastonja hyllyittäin ryhmiteltynä
+  - [x] voi listauksesta merkitä tuotteelle uuden parasta ennen -päiväyksen
+
 
 ### Jatkokehitysideoita
+- Tuotteen tarkistuksen voi ohittaa yhden päivän ajaksi
+- Tuotteelle voi määritellä osaston säännöstä poikkeavan _tarkistussäännön_
 - Sovellus antaa haluttaessa ilmoituksen/muistutuksen, esim. sähköpostiin jos on tarkistettavia tuotteita
 - Yksittäisten tuotteiden tietoja voi hakea ja tarkastella (esim. suoraan skannaamalla EAN-koodi päänäkymästä)
 - Tuotteille voi listätä kuvan, joka helpottaa tuotteen etsimistä

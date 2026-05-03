@@ -8,7 +8,7 @@ class TrackedProduct:
     def __init__(
             self,
             *,
-            tracked_product_id,
+            tracked_product_id=None,
             ean_code,
             expiration_date,
             shelf_id,

@@ -123,7 +123,7 @@ def create_tables(connection):
 
     cursor.execute('''
         CREATE TABLE tracked_products (
-        id TEXT PRIMARY KEY,
+        tracked_product_id TEXT PRIMARY KEY,
         ean_code TEXT NOT NULL,
         expiration_date TEXT NOT NULL,
         shelf_id TEXT NOT NULL,

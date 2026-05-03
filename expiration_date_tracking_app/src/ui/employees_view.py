@@ -1,6 +1,8 @@
 from tkinter import ttk, constants, StringVar, messagebox
 from services.user_service import user_service
 
+from ui.components.hover_label import HoverLabel
+
 # tämän luokan pohja on generoitu tekoälyllä, johon lisätty päälle omaa koodia
 
 
@@ -115,24 +117,19 @@ class EmployeesView:
             messagebox.showerror("Error", str(e))
 
     def _populate_employees(self):
-        for emp in self._employees:
-            emp.destroy()
+        for employee in self._employees:
+            employee.destroy()
         self._employees = []
 
         employees = user_service.get_employees()
-        for i, emp in enumerate(employees):
-            label = ttk.Label(
-                self._employees_frame,
-                text=emp.username,
-                font=(None, 12, "bold"),
-                cursor="arrow"
+        for i, employee in enumerate(employees):
+            label = HoverLabel(
+                master=self._employees_frame,
+                text=employee.username,
+                command=lambda e=employee: self._handle_employee_click(e)
             )
 
             label.grid(row=i, column=0, sticky="W", pady=2)
-            label.bind("<Button-1>", lambda event, e=emp: self._handle_employee_click(e)
-                       )
-            label.bind("<Enter>", self._on_employee_hover)
-            label.bind("<Leave>", self._on_employee_leave)
 
             self._employees.append(label)
 

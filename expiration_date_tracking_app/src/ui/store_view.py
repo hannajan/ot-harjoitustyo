@@ -2,6 +2,8 @@ from tkinter import ttk, StringVar
 from services.user_service import user_service
 from services.department_service import department_service
 
+from ui.components.hover_label import HoverLabel
+
 # Luokan runko generoitu tekoälyllä
 
 
@@ -53,7 +55,7 @@ class StoreView:
         title = ttk.Label(
             self._frame,
             text=f"{self._store.name}",
-            font=(None, 20, "bold")
+            font=(None, 24, "bold")
         )
 
         back_button = ttk.Button(
@@ -64,18 +66,23 @@ class StoreView:
 
         self._status_label = ttk.Label(self._frame, text="")
 
-        self._department_section = ttk.Frame(self._frame)
+        departments_title = ttk.Label(
+            self._frame,
+            text="Departments:",
+            font=(None, 20, "bold")
+        )
+
         self._departments_frame = ttk.Frame(self._frame)
+        self._department_section = ttk.Frame(self._frame)
 
         title.grid(row=0, column=0, sticky="W", pady=(0, 10))
         back_button.grid(row=0, column=1, sticky="E")
         self._status_label.grid(row=1, column=0, columnspan=2, sticky="W")
-        self._department_section.grid(
-            row=2, column=0, columnspan=2, sticky="W", pady=10)
+        departments_title.grid(row=2, column=0, columnspan=2, sticky="W")
         self._departments_frame.grid(
             row=3, column=0, columnspan=2, sticky="W", pady=10)
-
-        self._load_departments()
+        self._department_section.grid(
+            row=4, column=0, columnspan=2, sticky="W", pady=10)
 
         if self._can_manage():
             self._add_department_button = ttk.Button(
@@ -83,9 +90,11 @@ class StoreView:
                 text="Add department",
                 command=self._show_add_department
             )
-            self._add_department_button.grid(row=0, column=0, sticky="W")
+            self._add_department_button.grid(row=5, column=0, sticky="W")
 
         self._frame.columnconfigure(0, weight=1)
+
+        self._load_departments()
 
     def _can_manage(self):
         """Tarkistaa onko käyttäjällä manage-käyttöoikeus
@@ -106,8 +115,11 @@ class StoreView:
     def _show_add_department(self):
         """Näyttää syötkentän, kun painetaan lisää osasto-nappia
         """
+
         if self._add_department_frame:
             return
+
+        self._add_department_button.grid_remove()
 
         self._add_department_frame = ttk.Frame(self._department_section)
         self._add_department_frame.grid(row=1, column=0, pady=10, sticky="W")
@@ -161,6 +173,8 @@ class StoreView:
         self._add_department_frame = None
         self._status_label.config(text="")
 
+        self._add_department_button.grid()
+
     def _handle_save_department(self):
         """Handleri, joka vastaa osaston tallentamisesta.
         """
@@ -197,7 +211,6 @@ class StoreView:
         """
         for widget in self._departments_frame.winfo_children():
             widget.destroy()
-
         try:
             departments = department_service.get_departments_by_store(
                 self._store.store_id)
@@ -212,19 +225,14 @@ class StoreView:
             ).grid(row=0, column=0, sticky="W")
             return
 
-        for i, dept in enumerate(departments):
-            label = ttk.Label(
-                self._departments_frame,
-                text=dept.name,
-                font=(None, 12, "bold"),
-                cursor="arrow"
+        for i, department in enumerate(departments):
+            label = HoverLabel(
+                master=self._departments_frame,
+                text=department.name,
+                command=lambda d=department: self._handle_department_click(d)
             )
-            label.grid(row=i, column=0, sticky="W", pady=2)
 
-            label.bind(
-                "<Button-1>",
-                lambda e, d=dept: self._handle_department_click(d)
-            )
+            label.grid(row=i, column=0, sticky="W", pady=2)
 
     def _handle_department_click(self, department):
         """Handleri, joka vastaa osastonäkymään siirtymisestä, kun osaston nimeä klikataan.

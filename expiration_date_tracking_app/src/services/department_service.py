@@ -39,6 +39,21 @@ class DepartmentService:
 
     def get_departments_by_store(self, store_id):
         return self._department_repository.get_by_store(store_id)
+    
+    def update_department(self, department):
+        """Päivittää osaston tiedot.
+
+        Args:
+            department: Department-olio, jossa uudet arvot.
+        """
+
+        if not department.name:
+            raise ValueError("Department name must be given")
+
+        if not department.check_days_before:
+            raise ValueError("check days before must be given")
+
+        self._department_repository.update(department)
 
 
 department_service = DepartmentService()

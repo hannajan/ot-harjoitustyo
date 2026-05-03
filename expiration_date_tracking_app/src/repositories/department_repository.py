@@ -42,6 +42,32 @@ class DepartmentRepository:
              department.check_days_before))
         self._connection.commit()
 
+    def get_by_id(self, department_id):
+        """Palauttaa osaston id:n perusteella
+
+        Args:
+            department_id: Merkkijono, joka on palautettavan osaston id
+
+        Returns:
+            Department-olio
+        """
+        cursor = self._connection.cursor()
+
+        cursor.execute(
+            "SELECT "
+            "department_id, "
+            "store_id, "
+            "name, "
+            "check_days_before "
+            "FROM departments "
+            "WHERE department_id = ?",
+            (department_id,)
+        )
+
+        row = cursor.fetchone()
+
+        return get_department_by_row(row)
+
     def get_by_store(self, store_id):
         """Palauttaa kaupan osastot.
 
@@ -70,6 +96,27 @@ class DepartmentRepository:
         cursor.execute("PRAGMA foreign_keys = ON;")
 
         cursor.execute("DELETE FROM departments")
+        self._connection.commit()
+
+    def update(self, department):
+        """Päivittää osaston tiedot tietokantaan.
+
+        Args:
+            department: Department-olio, 
+            jonka tiedot päivitetään tietokantaan.
+        """
+
+        cursor = self._connection.cursor()
+        cursor.execute(
+            "UPDATE departments "
+            "SET name = ?, check_days_before = ? "
+            "WHERE department_id = ?",
+            (
+                department.name,
+                department.check_days_before,
+                department.department_id
+            )
+        )
         self._connection.commit()
 
 

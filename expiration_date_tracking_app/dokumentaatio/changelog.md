@@ -29,3 +29,5 @@
 - Tehty käyttöliittymään mahdollisuus lisätä osastoja ja näkymä osastolle, jossa voi lisätä hyllyjä
 - Tehty mahdollisuus muokata hyllyjen nimiä
 - Testattu Depatment ja DepartmentRepository-luokkia
+
+## Viikko 7

@@ -2,6 +2,8 @@ from tkinter import ttk, constants, StringVar
 from services.user_service import user_service
 from services.store_service import store_service
 
+from ui.components.hover_label import HoverLabel
+
 
 class HomeView():
     """Näkymä, joka vastaa aloitusnäkymän näyttämisestä.
@@ -127,21 +129,13 @@ class HomeView():
             print("No stores")
         else:
             for i, store in enumerate(stores):
-                store_title = ttk.Label(
+                store_title = HoverLabel(
                     master=self._stores_frame,
                     text=store.name,
-                    font=(None, 12, "bold"),
-                    cursor="arrow"
+                    command=lambda store=store: self._show_store_view(store),
                 )
 
                 store_title.grid(row=i, column=0, sticky="NW", pady=2)
-
-                store_title.bind(
-                    "<Button-1>",
-                    lambda event, store=store: self._show_store_view(store)
-                )
-                store_title.bind("<Enter>", self._on_store_hover)
-                store_title.bind("<Leave>", self._on_store_leave)
                 self._stores.append(store_title)
 
     def _on_store_hover(self, event):

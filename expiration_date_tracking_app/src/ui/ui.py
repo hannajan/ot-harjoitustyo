@@ -7,6 +7,7 @@ from ui.change_password_view import ChangePasswordView
 from ui.employee_view import EmployeeView
 from ui.store_view import StoreView
 from ui.department_view import DepartmentView
+from ui.shelf_view import ShelfView
 from services.user_service import user_service
 
 
@@ -164,7 +165,21 @@ class UI:
             department,
             user_service.get_current_user(),
             store,
-            self._show_store_view
+            self._show_store_view,
+            self._show_shelf_view
+        )
+
+        self._current_view.pack()
+
+    def _show_shelf_view(self, shelf, department, store):
+        self._hide_current_view()
+
+        self._current_view = ShelfView(
+            self._root,
+            shelf,
+            department,
+            store,
+            self._show_department_view
         )
 
         self._current_view.pack()

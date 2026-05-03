@@ -20,5 +20,7 @@
 | 25.4. | 2 | Osastojen lisäys: tietokantataulu, repositorio, service ja ui-näkymä |
 | 26.4. | 5 | Hyllyjen lisäys: tietokantataulu, repositoria, service ja ui-näkymä. Debuggailua. DocString ja arkkitehtuuridokumentaation päivitystä ja kirjoittamista |
 | 28.4. | 1.5 | Käyttöohjeen kirjoittaminen, Osaston testien kirjoittamista ja testien korjailua |
-| 1.5. | 1.5 | Toteutustavan suunnittelua, tietokantataulut tuotteelle ja seurannassa olevalle tuotteelle, luokat ja repositorio, DocString-dokumentointi luokille|
-| yht. | 48 | 
+| 1.5. | 1.5 | Toteutustavan suunnittelua, tietokantataulut tuotteelle ja seurannassa olevalle tuotteelle, luokat ja repositorio, DocString-dokumentointi luokille |
+| 2.5. | 2.5 | Product repositorio ja service, ui refaktorointia ja muokkausta, alustava ShelfView |
+| 3.5. | 6.5 | Tuotteiden tallennus tietokantaan ja ShelfView täydennystä, UI-editointi tarkistussäännölle, serviceen ja repositorioihin metodit toiminnallisuudelle, tarkistettavien tuotteiden listaus DepartmentView-näkymässä |
+| yht. | 50.5 | 

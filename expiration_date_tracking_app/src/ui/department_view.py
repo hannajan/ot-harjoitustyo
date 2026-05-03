@@ -1,21 +1,31 @@
+from datetime import datetime
+
 from tkinter import ttk, StringVar
 from services.user_service import user_service
 from services.shelf_service import shelf_service
+from services.department_service import department_service
+from services.product_service import product_service
 
-# Luokka generoitu tekoälyllä
+from ui.components.hover_label import HoverLabel
+
+# Luokan pohja generoitu alunperin tekoälyllä ja täydennetty omalla koodilla
 
 
 class DepartmentView:
-    def __init__(self, root, department, user, store, show_store_view):
+    def __init__(self, root, department, user, store, show_store_view, show_shelf_view):
         self._root = root
         self._department = department
         self._user = user
         self._store = store
         self._show_store_view = show_store_view
-        self._rename_frame = None
+        self._show_shelf_view = show_shelf_view
 
         self._frame = None
         self._add_shelf_frame = None
+        self._rename_frame = None
+        self._edit_days_frame = None
+
+        self._save_days_button = None
 
         self._initialize()
 
@@ -34,7 +44,12 @@ class DepartmentView:
         title = ttk.Label(
             self._frame,
             text=f"{self._department.name}",
-            font=(None, 20, "bold")
+            font=(None, 24, "bold")
+        )
+
+        self._days_label = ttk.Label(
+            self._frame,
+            text=f"Check days before: {self._department.check_days_before}"
         )
 
         back_button = ttk.Button(
@@ -48,21 +63,25 @@ class DepartmentView:
         shelves_title = ttk.Label(
             self._frame,
             text="Shelves:",
-            font=(None, 14, "bold")
+            font=(None, 20, "bold")
         )
 
         self._shelves_frame = ttk.Frame(self._frame)
+
+        self._products_to_check_frame = ttk.Frame(self._frame)
 
         title.grid(row=0, column=0, sticky="W")
         back_button.grid(row=0, column=1, sticky="E")
         self._status_label.grid(
             row=1, column=0, columnspan=2, sticky="W", pady=5)
-        shelves_title.grid(row=2, column=0, columnspan=2,
+        self._days_label.grid(row=2, column=0, columnspan=2, sticky="W")
+        shelves_title.grid(row=3, column=0, columnspan=2,
                            sticky="W", pady=(10, 0))
         self._shelves_frame.grid(
-            row=3, column=0, columnspan=2, sticky="W", pady=5)
-        self._shelves_frame.grid(
-            row=3, column=0, columnspan=2, sticky="W", pady=10)
+            row=4, column=0, columnspan=2, sticky="W", pady=5)
+        self._products_to_check_frame.grid(
+            row=6, column=0, columnspan=2, sticky="W", pady=(20, 0)
+        )
 
         self._load_shelves()
 
@@ -72,7 +91,14 @@ class DepartmentView:
                 text="Add shelf",
                 command=self._show_add_shelf
             )
-            self._add_shelf_button.grid(row=4, column=0, sticky="W", pady=10)
+           
+            self._edit_days_button = ttk.Button(
+                self._frame,
+                text="Edit",
+                command=self._show_edit_days
+            )
+            self._edit_days_button.grid(row=2, column=2, sticky="E")
+            self._add_shelf_button.grid(row=5, column=0, sticky="W", pady=10)
 
     def _can_manage(self):
         if not self._user.is_employee():
@@ -105,27 +131,76 @@ class DepartmentView:
             return
 
         for i, shelf in enumerate(shelves):
-            label = ttk.Label(
-                self._shelves_frame,
+            shelf_frame = ttk.Frame(self._shelves_frame)
+            shelf_frame.grid(row=i, column=0, sticky="W", pady=5)
+
+            shelf_title = HoverLabel(
+                master=shelf_frame,
                 text=f"{shelf.name}" +
                 (" (default)" if shelf.is_default else ""),
-                font=(None, 12, "bold"),
-                cursor="arrow"
+                command=lambda s=shelf: self._handle_shelf_click(s)
             )
 
-            label.grid(row=i, column=0, sticky="W", pady=2)
+            shelf_title.grid(row=0, column=0, sticky="W", pady=3)
 
-            label.bind(
-                "<Button-1>",
-                lambda e, s=shelf: self._handle_shelf_click(s)
-            )
+            if self._can_manage():
+                ttk.Button(
+                    shelf_frame,
+                    text="Edit name",
+                    command=lambda s=shelf: self._show_rename_shelf(s)
+                ).grid(row=0, column=1, padx=8, sticky="W")
+
+            products = product_service.get_products_to_check_by_shelf(shelf.shelf_id)
+            
+            for j, product in enumerate(products):
+                product_info = product_service.find_product_by_ean(
+                    product.ean_code
+                )
+
+                row_frame = ttk.Frame(shelf_frame)
+                row_frame.grid(row=j + 1, column=0, columnspan=2, sticky="EW", padx=(20, 0))
+
+                name_label = ttk.Label(
+                    row_frame,
+                    text=product_info.name,
+                    font=(None, 14, "bold")
+                )
+
+                try:
+                    formatted_date = datetime.fromisoformat(
+                        product.expiration_date
+                    ).strftime("%d-%m-%Y")
+                except ValueError:
+                    formatted_date = product.expiration_date
+
+                date_label = ttk.Label(
+                    row_frame,
+                    text=formatted_date,
+                    font=(None, 14, "bold")
+                )
+
+                ean_label = ttk.Label(
+                    row_frame,
+                    text=product.ean_code,
+                    font=(None, 12)
+                )
+
+                set_date_button = ttk.Button(
+                    row_frame,
+                    text="Set date",
+                    command=lambda row_frame=row_frame, product=product: self._show_set_date_form(row_frame, product)
+                )
+
+                row_frame.grid_columnconfigure(0, weight=1)
+                row_frame.grid_columnconfigure(1, weight=1)
+
+                name_label.grid(row=0, column=0, sticky="W")
+                date_label.grid(row=0, column=1, sticky="E")
+                ean_label.grid(row=1, column=0, sticky="W")
+                set_date_button.grid(row=1, column=2, sticky="E", padx=(10, 0))
 
     def _handle_shelf_click(self, shelf):
-        if not self._can_manage():
-            self._status_label.config(text="No permission to edit shelf")
-            return
-
-        self._show_rename_shelf(shelf)
+        self._show_shelf_view(shelf, self._department, self._store)
 
     def _show_add_shelf(self):
         if self._add_shelf_frame:
@@ -239,3 +314,85 @@ class DepartmentView:
             self._rename_frame = None
 
         self._load_shelves()
+
+    
+    #generoitu koodi alkaa
+    #muokattu toimivaksi
+    def _show_edit_days(self):
+        self._edit_days_button.grid_remove()
+
+        self._days_var = StringVar(
+            value=str(self._department.check_days_before)
+        )
+
+        self._days_entry = ttk.Entry(
+            self._frame,
+            textvariable=self._days_var,
+            width=10
+        )
+
+        self._days_entry.grid(row=2, column=2, sticky="W")
+
+        def save():
+            try:
+                new_check_days_before = int(self._days_var.get())
+
+                self._department.check_days_before = new_check_days_before
+
+                department_service.update_department(self._department)
+
+                self._days_label.config(
+                    text=f"Check days before: {new_check_days_before}"
+                )
+
+                self._days_entry.destroy()
+                self._days_entry = None
+                self._save_days_button.destroy()
+
+                self._edit_days_button.grid()
+                self._status_label.config(text="")
+
+            except ValueError:
+                self._status_label.config(text="Must be number")
+
+        self._save_days_button = ttk.Button(
+            self._frame,
+            text="Save",
+            command=save
+        )
+        self._save_days_button.grid(row=2, column=3, sticky="E")
+    
+
+    def _show_set_date_form(self, row_frame, product):
+        for widget in row_frame.grid_slaves(row=1, column=1):
+            widget.destroy()
+
+        expiration_var = StringVar()
+
+        entry = ttk.Entry(
+            row_frame,
+            textvariable=expiration_var,
+            width=10
+        )
+
+        def save():
+            try:
+                product_service.update_tracked_product_date(
+                    tracked_product_id=product.tracked_product_id,
+                    new_expiration_date=expiration_var.get().strip()
+                )
+
+                self._load_shelves()
+
+            except ValueError as error:
+                self._status_label.config(text=str(error))
+
+        save_button = ttk.Button(
+            row_frame,
+            text="Save",
+            command=save
+        )
+
+        entry.grid(row=1, column=1, sticky="E")
+        save_button.grid(row=1, column=2, sticky="E", padx=(5, 0))
+    #generoitu koodi päättyy
