@@ -78,7 +78,7 @@ class ShelfRepository:
         """Päivittää Shelf-olion tiedot tietokantaan.
 
         Args:
-            shelf: hylly, jonka tiedot päivitetään tietokantaan.
+            shelf: Shelf-olio, jonka tiedot päivitetään tietokantaan.
         """
         cursor = self._connection.cursor()
 
@@ -95,6 +95,14 @@ class ShelfRepository:
         self._connection.commit()
 
     def get_by_id(self, shelf_id):
+        """Palauttaa tietokannasta id:n perusteella löydetyn hyllyn.
+
+        Args:
+            shelf_id: Merkkijono, joka on sen hyllyn id, joka palautetaan.
+
+        Returns:
+            Shelf-olio
+        """
         cursor = self._connection.cursor()
 
         cursor.execute(

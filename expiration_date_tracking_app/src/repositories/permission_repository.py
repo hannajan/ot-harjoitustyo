@@ -15,7 +15,7 @@ class PermissionRepository:
         self._connection = connection
 
     def find_permission(self, employee_id, store_id):
-        """Palauutaa työntekijän kauppakohtaisen käyttöoikeuden.
+        """Palauttaa työntekijän kauppakohtaisen käyttöoikeuden.
 
         Args:
             employee_id: 

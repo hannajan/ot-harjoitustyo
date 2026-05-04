@@ -23,4 +23,5 @@
 | 1.5. | 1.5 | Toteutustavan suunnittelua, tietokantataulut tuotteelle ja seurannassa olevalle tuotteelle, luokat ja repositorio, DocString-dokumentointi luokille |
 | 2.5. | 2.5 | Product repositorio ja service, ui refaktorointia ja muokkausta, alustava ShelfView |
 | 3.5. | 6.5 | Tuotteiden tallennus tietokantaan ja ShelfView täydennystä, UI-editointi tarkistussäännölle, serviceen ja repositorioihin metodit toiminnallisuudelle, tarkistettavien tuotteiden listaus DepartmentView-näkymässä, lint-virheiden korjailua |
-| yht. | 57 | 
+| 4.5. | 1 | DocString-dokumentointia |
+| yht. | 58 | 

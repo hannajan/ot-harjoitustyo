@@ -7,7 +7,16 @@ from ui.components.hover_label import HoverLabel
 
 
 class EmployeesView:
+    """Näkymä, joka näyttää työntekijöiden listauksen ja voi lisätä työntekijöitä.
+    """
     def __init__(self, root, show_home_view, show_employee_view):
+        """Luokan konstruktori, joka luo uuden työntekijät-näkymän.
+
+        Args:
+            root: TKinter-elemnetti, jonka sisään näkymä luodaan.
+            show_home_view: Kutsuttava-arvo, joka vastaa kotinäkymään siirtymisetä.
+            show_employee_view: Kutsuttava-arvo, joa vastaa työntekijän näkymään siirtymisestä.
+        """
         self._root = root
         self._show_home_view = show_home_view
         self._show_employee_view = show_employee_view
@@ -19,9 +28,13 @@ class EmployeesView:
         self._initialize()
 
     def pack(self):
+        """Näyttää näkymän.
+        """
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
+        """Piilottaa näkymän.
+        """
         self._frame.destroy()
 
     def _initialize(self):

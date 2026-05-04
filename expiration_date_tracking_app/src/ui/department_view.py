@@ -12,7 +12,19 @@ from ui.components.hover_label import HoverLabel
 
 
 class DepartmentView:
+    """Näkymä, joka näyttää ja jossa voi hallinnoida osaston tietoja.
+    """
     def __init__(self, root, department, user, store, show_store_view, show_shelf_view):
+        """Luokan konstruktori.
+
+        Args:
+            root: TKinter-elemnetti, jonka sisään näkymä luodaan.
+            department: Department-olio, jonka näkymä näytetään.
+            user: User-olio, joka on käyttäjä.
+            store: Store-olio, joka on kauppa, johon osasto kuuluu.
+            show_store_view: Kutsuttava-arvo, joka vastaa kauppanäkymään siirtymisestä.
+            show_shelf_view: Kutsuttava-arvo, joka vastaa hyllynäkymään siirtymisestä.
+        """
         self._root = root
         self._department = department
         self._user = user
@@ -30,9 +42,13 @@ class DepartmentView:
         self._initialize()
 
     def pack(self):
+        """Näyttää näkymän.
+        """
         self._frame.pack(fill="both", expand=True)
 
     def destroy(self):
+        """Piilottaa näkymän.
+        """
         self._frame.destroy()
 
     def _handle_back(self):
@@ -320,7 +336,6 @@ class DepartmentView:
 
     # generoitu koodi alkaa
     # muokattu toimivaksi
-
     def _show_edit_days(self):
         self._edit_days_button.grid_remove()
 

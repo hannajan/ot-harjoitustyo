@@ -6,10 +6,27 @@ from repositories.shelf_repository import (
 
 
 class ShelfService:
+    """Luokka, joka vastaa hyllyihin liittyvästä sovelluslogiikasta.
+    """
     def __init__(self, shelf_repository=default_shelf_repository):
+        """Luokan konstruktori.
+
+        Args:
+            shelf_repository: ShelfRepository-olio, joka vastaa
+                hyllyihin liittyvistä tietokantaoperaatioista.
+        """
         self._shelf_repository = shelf_repository
 
     def create_shelf(self, department_id, name):
+        """Luo uuden hyllyn.
+
+        Args:
+            department_id: Merkkijono, joka sen on osaston id, johon hylly luodaan
+            name: Merkkjono, joka on hyllyn nimi.
+
+        Raises:
+            ValueError, jos nimeä ei ole annettu.
+        """
         if not name:
             raise ValueError("Shelf name must be given")
 
@@ -22,9 +39,29 @@ class ShelfService:
         self._shelf_repository.create(shelf)
 
     def get_shelves_by_department(self, department_id):
+        """Palauttaa listan hylly-olioita osaston id:n perusteella.
+
+        Args:
+            department_id: Merkkijono, joka on sen osaston id, jonka hyllyt palautetaan.
+
+        Returns:
+            Lista Shelf-olioita.
+        """
         return self._shelf_repository.get_shelves_by_department(department_id)
 
     def rename_shelf(self, shelf, new_name):
+        """Päivittää hyllyn nimen.
+
+        Args:
+            shelf: Shelf-olio, jonka nimi päivitetään.
+            new_name: Merkkijono, joka on hyllyn uusi nimi.
+
+        Raises:
+            ValueError, jos nimeä ei ole annettu.
+
+        Returns:
+            Päivitetty Shelf-olio.
+        """
         if not new_name:
             raise ValueError("Name must be given")
 

@@ -7,7 +7,16 @@ from entities.permission import Permission
 
 
 class EmployeeView:
+    """Näkymä, joka vastaa työntekijän oikeuksien hallinnoinnista.
+    """
     def __init__(self, root, employee, show_employees_view):
+        """Luokan konstruktori, joka luo näkymän.
+
+        Args:
+            root: TKinter-elemnetti, jonka sisään näkymä luodaan.
+            employee: Employee-olio, jonka näkymä näytetään.
+            show_employees_view: Kutsuttava-arvo, joka vastaa työntekijöiden näkymään siirtymisestä
+        """
         self._root = root
         self._employee = employee
         self._show_employees_view = show_employees_view
@@ -21,9 +30,13 @@ class EmployeeView:
         self._initialize()
 
     def pack(self):
+        """Näyttää näkymän.
+        """
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
+        """Piilottaa näkymän.
+        """
         self._frame.destroy()
 
     def _initialize(self):
