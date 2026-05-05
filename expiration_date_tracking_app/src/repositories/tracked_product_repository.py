@@ -101,37 +101,6 @@ class TrackedProductRepository:
 
         return [get_tracked_product_by_row(row) for row in rows]
 
-    # tämä metodi on generoitu tekoälyllä
-    def get_by_shelf(self, shelf_id):
-        """Palauttaa listan hyllyn id:n perusteella löydetyistä 
-        seurannassa olevista tuotteista
-
-
-        Args:
-            shelf_id: Merkkijono, joka on sen hyllyn id,
-            jonka tuotteet palautetaan
-
-        Returns:
-            Lista TrackedProduct-olioita
-        """
-        cursor = self._connection.cursor()
-
-        cursor.execute(
-            "SELECT "
-            "tracked_product_id, "
-            "ean_code, "
-            "expiration_date, "
-            "shelf_id, "
-            "check_days_before "
-            "FROM tracked_products "
-            "WHERE shelf_id = ?",
-            (shelf_id,)
-        )
-
-        rows = cursor.fetchall()
-
-        return [get_tracked_product_by_row(row) for row in rows]
-
     def update_expiration_date(self, tracked_product_id, expiration_date):
         """Päivittää seurannassa olevan tuotteen päiväyksen.
 

@@ -234,7 +234,7 @@ class ProductService:
         Returns:
             Lista TrackedProduct-olioita.
         """
-        products = self._tracked_product_repository.get_by_shelf(shelf_id)
+        products = self._tracked_product_repository.get_by_shelf_id(shelf_id)
         shelf = self._shelf_repository.get_by_id(shelf_id)
         department = self._department_repository.get_by_id(shelf.department_id)
 
