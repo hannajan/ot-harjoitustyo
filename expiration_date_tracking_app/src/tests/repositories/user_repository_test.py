@@ -1,13 +1,17 @@
 import unittest
+from repositories.shelf_repository import shelf_repository
 from repositories.user_repository import user_repository
 from repositories.store_repository import store_repository
 from repositories.department_repository import department_repository
+from repositories.permission_repository import permission_repository
 from entities.merchant import Merchant
 from entities.employee import Employee
 
 
 class TestUserRepository(unittest.TestCase):
     def setUp(self):
+        permission_repository.delete_all()
+        shelf_repository.delete_all()
         department_repository.delete_all()
         store_repository.delete_all()
         user_repository.delete_all()

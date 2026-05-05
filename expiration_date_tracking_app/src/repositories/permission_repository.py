@@ -88,6 +88,16 @@ class PermissionRepository:
         rows = cursor.fetchall()
 
         return [dict(row) for row in rows]
+    
+    def delete_all(self):
+        """Poistaa kaikki oikeudet tietokannasta.
+        """
+        cursor = self._connection.cursor()
+
+        cursor.execute(
+            "DELETE FROM employee_store_permissions;"
+        )
+        self._connection.commit()
 
 
 permission_repository = PermissionRepository(get_database_connection())

@@ -30,6 +30,9 @@ class ShelfRepository:
 
         Args:
           shelf: Shelf-olio, joka tallentetaan tietokantaan.
+
+        Returns:
+            Shelf-olio.
         """
         cursor = self._connection.cursor()
         cursor.execute("""
@@ -42,6 +45,8 @@ class ShelfRepository:
             int(shelf.is_default)
         ))
         self._connection.commit()
+
+        return shelf
 
     def get_shelves_by_department(self, department_id):
         """Palauttaa osaston hyllyt.
@@ -66,6 +71,9 @@ class ShelfRepository:
 
         Args:
             department_id: Merkkijono, joka viittaa luotuun osastoon, jolle oletusarvohylly luodaan.
+
+        Returns:
+            Shelf-olio.
         """
         shelf = Shelf(
             department_id=department_id,
@@ -73,6 +81,8 @@ class ShelfRepository:
             is_default=True
         )
         self.create(shelf)
+
+        return shelf
 
     def update(self, shelf):
         """Päivittää Shelf-olion tiedot tietokantaan.
@@ -119,6 +129,16 @@ class ShelfRepository:
         row = cursor.fetchone()
 
         return get_shelf_by_row(row)
+    
+    def delete_all(self):
+        """Poistaa kaikki hyllyt tietokannasta
+        """
 
+        cursor = self._connection.cursor()
+
+        cursor.execute(
+            "DELETE FROM shelves; "
+        )
+        self._connection.commit()
 
 shelf_repository = ShelfRepository(get_database_connection())

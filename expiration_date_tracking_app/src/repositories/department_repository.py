@@ -25,11 +25,14 @@ class DepartmentRepository:
         """
         self._connection = connection
 
-    def create(self, department: Department):
+    def create(self, department):
         """Tallentaa osaston tietokantaan.
 
         Args:
             department: Osasto, joka tallennetaan tietokantaan.
+
+        Returns:
+            Department-olio.
         """
 
         cursor = self._connection.cursor()
@@ -41,6 +44,8 @@ class DepartmentRepository:
              department.name,
              department.check_days_before))
         self._connection.commit()
+
+        return department
 
     def get_by_id(self, department_id):
         """Palauttaa osaston id:n perusteella
