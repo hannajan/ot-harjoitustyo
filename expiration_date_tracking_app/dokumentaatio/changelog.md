@@ -31,3 +31,9 @@
 - Testattu Depatment ja DepartmentRepository-luokkia
 
 ## Viikko 7
+- Tehty tietokantaan taulut products ja tracked_products
+- Tehty entity, repositorio ja service luokat tuotteille
+- Tehty käyttöliittymään mahdollisuus lisätä tuotteita ja poistaa tuotteita
+- Tehty mahdollisuus asettaa tuotteelle uusi parasta ennen -päiväys
+- Tehty käyttöliittymään listaus tarkistettavista tuotteista
+- Testattu repositorioluokkia

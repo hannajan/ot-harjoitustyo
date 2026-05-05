@@ -24,4 +24,5 @@
 | 2.5. | 2.5 | Product repositorio ja service, ui refaktorointia ja muokkausta, alustava ShelfView |
 | 3.5. | 6.5 | Tuotteiden tallennus tietokantaan ja ShelfView täydennystä, UI-editointi tarkistussäännölle, serviceen ja repositorioihin metodit toiminnallisuudelle, tarkistettavien tuotteiden listaus DepartmentView-näkymässä, lint-virheiden korjailua |
 | 4.5. | 1 | DocString-dokumentointia |
-| yht. | 58 | 
+| 5.5. | 1.5 | Testien kirjoittaminen repositorioluokille |
+| yht. | 59.5 | 
