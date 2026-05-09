@@ -4,7 +4,7 @@ from entities.department import Department
 
 class TestDepartment(unittest.TestCase):
 
-    def test_created_departmnet_has_correct_attributes(self):
+    def test_created_department_has_correct_attributes(self):
         department = Department(
             "store_id123", "Test Department", 7, "dep_id_123")
 

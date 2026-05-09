@@ -1,8 +1,8 @@
 import unittest
 from repositories.shelf_repository import shelf_repository
 from repositories.user_repository import (
-  user_repository,
-  get_user_by_row
+    user_repository,
+    get_user_by_row
 )
 from repositories.store_repository import store_repository
 from repositories.department_repository import department_repository

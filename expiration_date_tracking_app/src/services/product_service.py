@@ -23,6 +23,7 @@ from repositories.shelf_repository import (
 class ProductService:
     """Luokka, joka vastaa tuotteisiin liittyvästä sovelluslogiikasta.
     """
+
     def __init__(
         self,
         product_repository=default_product_repository,
@@ -200,31 +201,7 @@ class ProductService:
 
         self._tracked_product_repository.delete(tracked_product_id)
 
-    # def get_products_to_check_by_department(self, department_id):
-    #     products = self._tracked_product_repository.get_by_department(
-    #         department_id)
-    #     department = self._department_repository.get_by_id(department_id)
-
-    #     today = date.today()
-    #     result = []
-
-    #     for product in products:
-    #         expiration_date = datetime.strptime(
-    #             product.expiration_date, "%Y-%m-%d").date()
-
-    #         check_days_before = product.check_days_before
-
-    #         if check_days_before is None:
-    #             check_days_before = department.check_days_before
-
-    #         check_date = expiration_date - timedelta(days=check_days_before)
-
-    #         if check_date <= today:
-    #             result.append(product)
-
-    #     return result
-
-    #tämän metodin runko on generoitu tekoälyllä
+    # tämän metodin runko on generoitu tekoälyllä
     def get_products_to_check_by_shelf(self, shelf_id):
         """Palauttaa tarkistettavat tuotteen hyllyn id:n perusteella.
 

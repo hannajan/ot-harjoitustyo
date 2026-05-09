@@ -9,6 +9,7 @@ from ui.components.hover_label import HoverLabel
 class EmployeesView:
     """Näkymä, joka näyttää työntekijöiden listauksen ja voi lisätä työntekijöitä.
     """
+
     def __init__(self, root, show_home_view, show_employee_view):
         """Luokan konstruktori, joka luo uuden työntekijät-näkymän.
 

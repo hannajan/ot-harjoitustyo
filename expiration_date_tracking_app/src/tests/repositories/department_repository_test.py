@@ -1,8 +1,8 @@
 import unittest
 from repositories.shelf_repository import shelf_repository
 from repositories.department_repository import (
-  department_repository,
-  get_department_by_row
+    department_repository,
+    get_department_by_row
 )
 from repositories.store_repository import store_repository
 from repositories.user_repository import user_repository
@@ -37,7 +37,8 @@ class TestDepartmentRepository(unittest.TestCase):
     def test_get_by_id_works_with_valid_id(self):
         department = department_repository.create(self.department)
 
-        found_department = department_repository.get_by_id(department_id=department.department_id)
+        found_department = department_repository.get_by_id(
+            department_id=department.department_id)
 
         self.assertEqual(found_department.name, "Hams")
         self.assertEqual(found_department.check_days_before, 2)
@@ -48,7 +49,8 @@ class TestDepartmentRepository(unittest.TestCase):
 
         department_repository.update(department)
 
-        updated_department = department_repository.get_by_id(department_id=department.department_id)
+        updated_department = department_repository.get_by_id(
+            department_id=department.department_id)
 
         self.assertEqual(updated_department.name, "Hams")
         self.assertEqual(updated_department.check_days_before, 5)

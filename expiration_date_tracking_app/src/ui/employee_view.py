@@ -9,6 +9,7 @@ from entities.permission import Permission
 class EmployeeView:
     """Näkymä, joka vastaa työntekijän oikeuksien hallinnoinnista.
     """
+
     def __init__(self, root, employee, show_employees_view):
         """Luokan konstruktori, joka luo näkymän.
 

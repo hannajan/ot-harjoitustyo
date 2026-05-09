@@ -2,16 +2,18 @@ import unittest
 
 from entities.product import Product
 from repositories.product_repository import (
-  product_repository,
-  get_product_by_row
+    product_repository,
+    get_product_by_row
 )
+
 
 class TestProductRepository(unittest.TestCase):
     def setUp(self):
         product_repository.delete_all()
 
-        product_repository.create(Product("6419800120018", "Teho energiajuoma"))
-    
+        product_repository.create(
+            Product("6419800120018", "Teho energiajuoma"))
+
     def test_create_product_works(self):
         juice = Product("6415130027980", "Marli Juissi sekamehujuoma 1l")
 

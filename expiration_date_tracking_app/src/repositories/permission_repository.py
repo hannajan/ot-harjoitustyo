@@ -88,7 +88,7 @@ class PermissionRepository:
         rows = cursor.fetchall()
 
         return [dict(row) for row in rows]
-    
+
     def delete_all(self):
         """Poistaa kaikki oikeudet tietokannasta.
         """

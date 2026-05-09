@@ -8,6 +8,7 @@ from repositories.shelf_repository import (
 class ShelfService:
     """Luokka, joka vastaa hyllyihin liittyvästä sovelluslogiikasta.
     """
+
     def __init__(self, shelf_repository=default_shelf_repository):
         """Luokan konstruktori.
 

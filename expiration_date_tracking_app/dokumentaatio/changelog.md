@@ -36,4 +36,4 @@
 - Tehty käyttöliittymään mahdollisuus lisätä tuotteita ja poistaa tuotteita
 - Tehty mahdollisuus asettaa tuotteelle uusi parasta ennen -päiväys
 - Tehty käyttöliittymään listaus tarkistettavista tuotteista
-- Testattu repositorioluokkia
+- Testattu repositorioluokkia ja ProductService-luokkaa, korjattu laatuvirheitä

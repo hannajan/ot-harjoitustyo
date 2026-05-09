@@ -129,7 +129,7 @@ class ShelfRepository:
         row = cursor.fetchone()
 
         return get_shelf_by_row(row)
-    
+
     def delete_all(self):
         """Poistaa kaikki hyllyt tietokannasta
         """
@@ -140,5 +140,6 @@ class ShelfRepository:
             "DELETE FROM shelves; "
         )
         self._connection.commit()
+
 
 shelf_repository = ShelfRepository(get_database_connection())

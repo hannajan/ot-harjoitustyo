@@ -8,6 +8,7 @@ from services.product_service import product_service
 class ShelfView:
     """Näkymä, joka vastaa hyllyn tietojen näyttämisestä ja voi lisätä tuotteita hyllyyn.
     """
+
     def __init__(self, root, shelf, department, store, show_department_view):
         """Luokan konstruktori, joka luo uuden hylly-näkymän.
 

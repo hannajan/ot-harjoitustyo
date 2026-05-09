@@ -12,6 +12,7 @@ from repositories.shelf_repository import (
 class DepartmentService:
     """Luokka, joka vastaa osastoon liittyvästä sovelluslogiikasta.
     """
+
     def __init__(
         self,
         department_repository=default_department_repository,

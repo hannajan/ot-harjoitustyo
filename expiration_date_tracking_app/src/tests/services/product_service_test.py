@@ -5,13 +5,15 @@ from services.product_service import ProductService
 from entities.product import Product
 from entities.tracked_product import TrackedProduct
 
+
 class MockProductRepository:
     def __init__(self, products=None):
         self.products = products or []
 
     def create(self, product):
         self.products.append(product)
-        
+
+
 class MockTrackedProductRepository:
     def __init__(self, tracked_products=None):
         self.tracked_products = tracked_products or []
@@ -28,19 +30,21 @@ class MockTrackedProductRepository:
         products = []
 
         for self.tracked_product in self.tracked_products:
-          if self.tracked_product.shelf_id == shelf_id:
-            products.append(self.tracked_product)
+            if self.tracked_product.shelf_id == shelf_id:
+                products.append(self.tracked_product)
 
         return products
-        
-    
+
+
 class MockDepartmentRepository:
     def __init__(self):
         pass
-        
+
+
 class MockShelfRepository:
     def __init__(self):
         pass
+
 
 class TestProductService(unittest.TestCase):
     def setUp(self):
@@ -52,7 +56,8 @@ class TestProductService(unittest.TestCase):
         )
 
     def test_add_product_info_works_with_valid_attributes(self):
-        product = self.product_service.add_product_info(ean_code="123456", name="Maito")
+        product = self.product_service.add_product_info(
+            ean_code="123456", name="Maito")
 
         self.assertIsInstance(product, Product)
         self.assertEqual(product.name, "Maito")
@@ -66,7 +71,6 @@ class TestProductService(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Product name must be given"):
             self.product_service.add_product_info(ean_code="456456", name=None)
 
-        
     def test_add_tracked_product_works_with_valid_attributes(self):
         tracked_product = self.product_service.add_tracked_product(
             ean_code="654321",
@@ -116,13 +120,15 @@ class TestProductService(unittest.TestCase):
             )
 
     def test_update_tracked_product_date_works(self):
-        tracked_product = self.product_service.add_tracked_product("123456", "070726", "id123")
+        tracked_product = self.product_service.add_tracked_product(
+            "123456", "070726", "id123")
         self.product_service.update_tracked_product_date(
             tracked_product_id=tracked_product.tracked_product_id,
             new_expiration_date="111127"
-            )
-        
-        products = self.product_service.get_tracked_products_for_shelf(shelf_id="id123")
+        )
+
+        products = self.product_service.get_tracked_products_for_shelf(
+            shelf_id="id123")
 
         self.assertEqual(products[0].ean_code, "123456")
         self.assertEqual(products[0].expiration_date, "2027-11-11")

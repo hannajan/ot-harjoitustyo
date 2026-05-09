@@ -14,6 +14,7 @@ from ui.components.hover_label import HoverLabel
 class DepartmentView:
     """Näkymä, joka näyttää ja jossa voi hallinnoida osaston tietoja.
     """
+
     def __init__(self, root, department, user, store, show_store_view, show_shelf_view):
         """Luokan konstruktori.
 
