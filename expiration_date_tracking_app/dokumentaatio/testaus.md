@@ -4,7 +4,7 @@
 
 Sovellusta on testattu automatisoiduin yksikkö- ja integraatiotestein `entity`-, `repository`- ja `service`-luokille.
 
-Autoatisoiduin testein on varmistettu yksikkötesteillä, että oliot toimivat oikein ja service-luokkien sovelluslogiikan toimintaa, sekä integraatiotesteillä, että tietokantaan tallennus toimii. 
+Automatisoiduin testein on varmistettu yksikkötesteillä, että oliot toimivat oikein ja service-luokkien sovelluslogiikan toimintaa, sekä integraatiotesteillä, että tietokantaan tallennus toimii. 
 
 Repository-testit käyttävät `test-database.sqlite`-tiedostoa, jonka nimen voi konfiguroida _.env.test_-tiedostoon.
 
