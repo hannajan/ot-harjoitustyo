@@ -25,5 +25,5 @@
 | 3.5. | 6.5 | Tuotteiden tallennus tietokantaan ja ShelfView täydennystä, UI-editointi tarkistussäännölle, serviceen ja repositorioihin metodit toiminnallisuudelle, tarkistettavien tuotteiden listaus DepartmentView-näkymässä, lint-virheiden korjailua |
 | 4.5. | 1 | DocString-dokumentointia |
 | 5.5. | 2 | Testien kirjoittaminen repositorioluokille |
-| 9.5. | 2 | testien kirjoittamista |
-| yht. | 60 | 
+| 9.5. | 3 | Testien kirjoittamista, testausdokumentti ja laatuvirheiden korjailua |
+| yht. | 63 | 
