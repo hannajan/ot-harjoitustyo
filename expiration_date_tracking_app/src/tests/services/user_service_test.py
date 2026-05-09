@@ -194,3 +194,11 @@ class TestUserService(unittest.TestCase):
         self.user_service.login("Merchant", "Password")
         self.assertEqual(
             self.user_service.get_current_user().username, "Merchant")
+        
+    def test_create_new_employee_raises_valueerror_if_no_username(self):
+        self.user_service.register_merchant("Merchant", "Password")
+        self.user_service.login("Merchant", "Password")
+
+        with self.assertRaisesRegex(ValueError, "Username missing"):
+            self.user_service.create_new_employee()
+

@@ -141,7 +141,7 @@ class ProductService:
         try:
             exp_date = datetime.strptime(expiration_date, "%d%m%y").date()
         except ValueError as exc:
-            raise ValueError("Date must be given in format ddmmyy") from exc
+            raise ValueError("Invalid date") from exc
 
         tracked_product = TrackedProduct(
             ean_code=ean_code,

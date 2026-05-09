@@ -1,11 +1,15 @@
 import unittest
 from repositories.shelf_repository import shelf_repository
-from repositories.user_repository import user_repository
+from repositories.user_repository import (
+  user_repository,
+  get_user_by_row
+)
 from repositories.store_repository import store_repository
 from repositories.department_repository import department_repository
 from repositories.permission_repository import permission_repository
 from entities.merchant import Merchant
 from entities.employee import Employee
+from entities.user_role import UserRole
 
 
 class TestUserRepository(unittest.TestCase):
@@ -72,3 +76,36 @@ class TestUserRepository(unittest.TestCase):
         self.assertEqual(len(employees), 2)
         self.assertEqual(employees[0].username, "worker")
         self.assertEqual(employees[1].username, "employee")
+
+    def test_get_user_by_row_returns_none_if_no_row(self):
+        user = get_user_by_row(None)
+
+        self.assertIsNone(user)
+
+    def test_get_user_by_row_return_employee_if_role_employee(self):
+        row = {
+            "user_id": "id123",
+            "username": "worker",
+            "password": "password",
+            "role": UserRole.EMPLOYEE,
+            "employer_id": "id89",
+            "password_is_temporary": 0
+        }
+
+        user = get_user_by_row(row)
+
+        self.assertIsInstance(user, Employee)
+
+    def test_get_user_by_row_returns_none_if_role_unknown(self):
+        row = {
+            "user_id": "id123",
+            "username": "worker",
+            "password": "password",
+            "role": "notvalid",
+            "employer_id": "id89",
+            "password_is_temporary": 0
+        }
+
+        user = get_user_by_row(row)
+
+        self.assertIsNone(user)

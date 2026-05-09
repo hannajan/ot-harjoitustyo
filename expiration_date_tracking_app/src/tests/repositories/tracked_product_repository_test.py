@@ -67,4 +67,4 @@ class TestTrackedProductRepository(unittest.TestCase):
     def test_get_tracked_product_by_row_returns_none_if_row_no_row(self):
       product = get_tracked_product_by_row(None)
 
-      self.assertEqual(product, None)
+      self.assertIsNone(product)

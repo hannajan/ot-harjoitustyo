@@ -1,7 +1,10 @@
 import unittest
 
 from entities.product import Product
-from repositories.product_repository import product_repository
+from repositories.product_repository import (
+  product_repository,
+  get_product_by_row
+)
 
 class TestProductRepository(unittest.TestCase):
     def setUp(self):
@@ -21,3 +24,8 @@ class TestProductRepository(unittest.TestCase):
         product = product_repository.get_by_ean_code("6419800120018")
 
         self.assertEqual(product.name, "Teho energiajuoma")
+
+    def test_get_product_by_row_returns_none_if_no_row(self):
+        product = get_product_by_row(None)
+
+        self.assertIsNone(product)

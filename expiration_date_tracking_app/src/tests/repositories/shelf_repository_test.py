@@ -1,6 +1,9 @@
 import unittest
 
-from repositories.shelf_repository import shelf_repository
+from repositories.shelf_repository import (
+  shelf_repository,
+  get_shelf_by_row
+)
 from repositories.department_repository import department_repository
 from repositories.store_repository import store_repository
 from repositories.user_repository import user_repository
@@ -65,4 +68,9 @@ class TestShelfRepository(unittest.TestCase):
 
         self.assertTrue(any(shelf.name == "Some shelf" for shelf in shelves))
         self.assertTrue(any(shelf.name == "Another shelf" for shelf in shelves))
+
+    def test_get_shelf_by_row_returns_none_if_no_row(self):
+        shelf = get_shelf_by_row(None)
+
+        self.assertIsNone(shelf)
 

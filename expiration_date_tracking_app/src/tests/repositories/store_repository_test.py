@@ -1,6 +1,9 @@
 import unittest
 from repositories.shelf_repository import shelf_repository
-from repositories.store_repository import store_repository
+from repositories.store_repository import (
+  store_repository,
+  get_store_by_row
+)
 from repositories.user_repository import user_repository
 from repositories.department_repository import department_repository
 from repositories.permission_repository import permission_repository
@@ -59,3 +62,14 @@ class TestStoreRepository(unittest.TestCase):
 
         stores = store_repository.find_all_by_owner_id(self.user3.user_id)
         self.assertEqual(len(stores), 0)
+
+    def test_find_by_id_works_with_valid_id(self):
+        store = store_repository.create(self.store)
+        found_store = store_repository.find_by_id(store.store_id)
+
+        self.assertEqual(found_store.name, "Test Store")
+
+    def test_get_store_by_row_returns_none_if_no_row(self):
+        store = get_store_by_row(None)
+
+        self.assertIsNone(store)
