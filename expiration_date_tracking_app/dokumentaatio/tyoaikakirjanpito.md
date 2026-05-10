@@ -26,5 +26,5 @@
 | 4.5. | 1 | DocString-dokumentointia |
 | 5.5. | 2 | Testien kirjoittaminen repositorioluokille |
 | 9.5. | 3 | Testien kirjoittamista, testausdokumentti ja laatuvirheiden korjailua |
-| 10.5.| 1 | Arkkitehtuurikuvauksen täydennys | 
-| yht. | 63 | 
+| 10.5.| 2 | Arkkitehtuurikuvauksen täydennys, käyttöohjeen täydennys | 
+| yht. | 65 | 
