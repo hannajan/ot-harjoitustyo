@@ -180,7 +180,6 @@ class UserService:
 
         self.validate_username(username)
         password = generator.generate_temporary_password()
-        print(password)
 
         employee = Employee(username, password, current_user.user_id)
         self._user_repository.create(employee)

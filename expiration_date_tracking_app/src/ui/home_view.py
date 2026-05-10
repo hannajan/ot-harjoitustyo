@@ -126,7 +126,7 @@ class HomeView():
             stores = store_service.get_stores_by_owner(self._user.user_id)
 
         if not stores:
-            print("No stores")
+            pass
         else:
             for i, store in enumerate(stores):
                 store_title = HoverLabel(
