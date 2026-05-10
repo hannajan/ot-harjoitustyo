@@ -9,6 +9,7 @@
 [Arkkitehtuuri](https://github.com/hannajan/ot-harjoitustyo/blob/master/expiration_date_tracking_app/dokumentaatio/arkkitehtuuri.md)  
 [Releases](https://github.com/hannajan/ot-harjoitustyo/releases)  
 [Käyttöohje](https://github.com/hannajan/ot-harjoitustyo/blob/master/expiration_date_tracking_app/dokumentaatio/kayttoohje.md)  
+[Testausdokumentti](https://github.com/hannajan/ot-harjoitustyo/blob/master/expiration_date_tracking_app/dokumentaatio/testaus.md)  
 
 
 ## Asennus
